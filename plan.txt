@@ -1,0 +1,11 @@
+ducks (interactive ducks)
+interactive waves (ducks can swim on it)
+whales
+proper bloom effect from the sun
+hero section big text=name, little text under it
+buttons to go projects and contact
+3 sections
+smooth and direct scroll
+contact form (more whales)
+links to social 
+some funny easter eggs

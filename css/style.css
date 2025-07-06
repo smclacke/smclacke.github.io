@@ -1,0 +1,204 @@
+body {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+#sky {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 40%;
+	background: linear-gradient(to bottom, #FFC1CC, #FFB6C1);
+}
+
+#ocean {
+	position: absolute;
+	top: 40%;
+	left: 0;
+	width: 100%;
+	height: 60%;
+	background: linear-gradient(to bottom, #42A5F5, #0D47A1);
+}
+
+.sun {
+	position: absolute;
+	top: 20%;
+	left: 60%;
+	transform: translate(-50%, -50%);
+	width: 60px;
+	height: 60px;
+	background: white;
+	border-radius: 50%;
+	box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.8);
+}
+
+.cloud {
+	position: absolute;
+	background: white;
+	border-radius: 50px;
+}
+
+.cloud:nth-child(1) {
+	width: 80px;
+	height: 40px;
+	top: 10%;
+	left: 10%;
+}
+
+.cloud:nth-child(2) {
+	width: 60px;
+	height: 30px;
+	top: 20%;
+	left: 25%;
+}
+
+.cloud:nth-child(3) {
+	width: 50px;
+	height: 25px;
+	top: 15%;
+	left: 35%;
+}
+
+.cloud:nth-child(4) {
+	width: 70px;
+	height: 35px;
+	top: 25%;
+	left: 80%;
+}
+
+.light-ray {
+	position: absolute;
+	top: 0;
+	width: 15px;
+	height: 100%;
+	background: rgba(173, 216, 230, 0.5);
+	transform-origin: top center;
+}
+
+.boat {
+	position: absolute;
+	top: -20px;
+	right: 20%;
+	width: 100px;
+	height: 30px;
+}
+
+.hull {
+	width: 100%;
+	height: 100%;
+	background: #4CAF50;
+	border-top: 4px solid #F44336;
+}
+
+.deck {
+	position: absolute;
+	top: -10px;
+	left: 20px;
+	width: 60px;
+	height: 10px;
+	background: #8D5524;
+}
+
+.sail {
+	position: absolute;
+	top: -50px;
+	left: 40px;
+	width: 0;
+	height: 0;
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	border-bottom: 40px solid white;
+}
+
+.sail::after {
+	content: 'G';
+	position: absolute;
+	top: 10px;
+	left: -5px;
+	color: #4CAF50;
+	font-family: 'Courier New', monospace;
+	font-size: 20px;
+}
+
+.figure {
+	position: absolute;
+	top: -20px;
+	left: 30px;
+	width: 10px;
+	height: 20px;
+	background: #3E2723;
+}
+
+.figure::before {
+	content: '';
+	position: absolute;
+	top: -5px;
+	left: 0;
+	width: 10px;
+	height: 5px;
+	background: #4CAF50;
+}
+
+.life-preserver {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	width: 15px;
+	height: 15px;
+	border: 3px solid #FF9800;
+	border-radius: 50%;
+	background: white;
+}
+
+
+.body {
+	width: 20px;
+	height: 30px;
+	background: #E0E0E0;
+}
+
+.head {
+	position: absolute;
+	top: -10px;
+	left: 5px;
+	width: 10px;
+	height: 10px;
+	background: #616161;
+	border-radius: 50%;
+}
+.bubble {
+	position: absolute;
+	background: white;
+	border-radius: 50%;
+	opacity: 0.8;
+}
+
+.bubble:nth-child(1) {
+	width: 10px;
+	height: 10px;
+	top: 30%;
+	left: 35%;
+}
+
+.bubble:nth-child(2) {
+	width: 8px;
+	height: 8px;
+	top: 25%;
+	left: 38%;
+}
+
+.bubble:nth-child(3) {
+	width: 12px;
+	height: 12px;
+	top: 20%;
+	left: 40%;
+}
+
+.bubble:nth-child(4) {
+	width: 6px;
+	height: 6px;
+	top: 28%;
+	left: 42%;
+}
