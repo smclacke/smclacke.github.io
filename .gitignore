@@ -7,6 +7,9 @@
 # Unignore Makefile
 !Makefile
 
+# Unignore CNAME
+!CNAME
+
 # Unignore all dirs
 !*/
 
