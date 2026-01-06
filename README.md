@@ -1,1 +1,1 @@
-Portfolio website *IN PROGRESS**
+Portfolio website *IN PROGRESS*
