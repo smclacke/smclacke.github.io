@@ -19,6 +19,7 @@ img, picture, svg, video {
 
 html {
 	-webkit-text-size-adjust: 100%;
+	height: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -36,6 +37,15 @@ body {
 	padding: 0;
 	overflow-x: hidden;
 	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+#scene {
+	position: relative;
+	width: 100%;
+	height: 100%;
 }
 
 #sky {
@@ -55,6 +65,7 @@ body {
 	height: 60%;
 	background: linear-gradient(to bottom, var(--color-ocean-start), var(--color-ocean-end));
 }
+
 
 .sun {
 	position: absolute;
@@ -262,6 +273,21 @@ body {
 
 /* Content + nav styles */
 .site-header { position: relative; z-index: 60; }
+
+#hero {
+	position: relative;
+	flex-shrink: 0;
+	width: 100%;
+	height: 100vh;
+	overflow: hidden;
+}
+
+#scene {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
 .mobile-nav {
     position: fixed;
     top: 16px; right: 16px;
@@ -287,9 +313,19 @@ body {
 }
 .mobile-nav button { cursor: pointer; border: 1px solid rgba(0,0,0,0.08); }
 
-#hero { position: relative; min-height: 60vh; }
-.content { position: relative; z-index: 80; }
-.section { padding: 48px 16px; max-width: 880px; margin: 0 auto; }
+.content { 
+	flex: 1;
+	background: white;
+	position: relative; 
+	z-index: 80; 
+}
+
+.section { 
+	padding: 48px 16px; 
+	max-width: 880px; 
+	margin: 0 auto; 
+}
+
 .section h2 { margin: 0 0 12px; }
 .project-list { padding-left: 20px; }
 
