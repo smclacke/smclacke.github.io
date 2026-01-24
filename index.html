@@ -10,7 +10,14 @@
 <body>
 	<div class="name-title">Sarah McLacken</div>
 	<div class="construction-notice">🚧 Portfolio website under construction 🚧</div>
-	<div id="scene">
+	<nav class="mobile-nav" aria-label="Primary">
+		<a href="#about">About</a>
+		<a href="#projects">Projects</a>
+		<a href="#contact">Contact</a>
+		<button id="motionToggle" type="button" aria-pressed="false" aria-label="Toggle motion">Motion</button>
+	</nav>
+	<section id="hero" aria-label="Hero scene">
+		<div id="scene">
 		<div id="sky">
 			<div class="sun">
 			</div>
@@ -23,21 +30,33 @@
 	</div>
 	<div id="ocean">
 		
-		<img src="images/Mallard_Duck_(flying).gif" alt="flying duck" class="flying-duck" />
-		<img src="images/Mallard_Duck_(flying).gif" alt="flying duck" class="flying-duck1" />
-		<img src="images/Mallard_Duck_(flying).gif" alt="flying duck" class="flying-duck2" />
-		<img src="images/Mallard_Duck_(flying).gif" alt="flying duck" class="flying-duck3" />
-		<img src="images/Mallard_Duck_(flying).gif" alt="flying duck" class="flying-duck4" />
+		<img src="images/Mallard_Duck_(flying).gif" alt="Flying duck" class="flying-duck" decoding="async" loading="lazy" />
+		<img src="images/Mallard_Duck_(flying).gif" alt="Flying duck" class="flying-duck1" decoding="async" loading="lazy" />
+		<img src="images/Mallard_Duck_(flying).gif" alt="Flying duck" class="flying-duck2" decoding="async" loading="lazy" />
+		<img src="images/Mallard_Duck_(flying).gif" alt="Flying duck" class="flying-duck3" decoding="async" loading="lazy" />
+		<img src="images/Mallard_Duck_(flying).gif" alt="Flying duck" class="flying-duck4" decoding="async" loading="lazy" />
 
-		<!--<img src="images/duck_butt.png" alt="Duck" class="duck duck1" />
-		<img src="images/duck_butt.png" alt="Duck" class="duck duck2" />
-		<img src="images/duck_butt.png" alt="Duck" class="duck duck3" />
-		<img src="images/duck_butt.png" alt="Duck" class="duck duck4" />
-		<img src="images/duck_butt.png" alt="Duck" class="duck duck5" />
-		<img src="images/duck_butt.png" alt="Duck" class="duck duck6" />
-		<img src="images/duck_butt.png" alt="Duck" class="duck duck7" />
-		<img src="images/duck_butt.png" alt="Duck" class="duck duck8" />-->
 		<img src="images/whale_ocean.png" alt="Whale" class="whale" />
 	</div>
+	</section>
+	<main id="content" class="content" aria-label="Main content">
+		<section id="about" class="section">
+			<h2>About</h2>
+			<p>Hi, I’m Sarah. This portfolio is a playful work-in-progress while I assemble projects and writing. Check back soon for updates!</p>
+		</section>
+		<section id="projects" class="section">
+			<h2>Projects</h2>
+			<ul class="project-list">
+				<li>Project One — brief description goes here.</li>
+				<li>Project Two — brief description goes here.</li>
+				<li>Project Three — brief description goes here.</li>
+			</ul>
+		</section>
+		<section id="contact" class="section">
+			<h2>Contact</h2>
+			<p>Say hello at <a href="mailto:sarah@mclacken.com">sarah@mclacken.com</a> or reach out on LinkedIn: <a href="https://www.linkedin.com/in/sarah-mclacken/">sarah-mclacken</a>.</p>
+		</section>
+	</main>
+	<script src="js/main.js" defer></script>
 </body>
 </html>

@@ -34,7 +34,8 @@ html {
 body {
 	margin: 0;
 	padding: 0;
-	overflow: hidden;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 
 #sky {
@@ -258,3 +259,46 @@ body {
     .name-title { top: 24px; left: 32px; right: 32px; font-size: clamp(1.5rem, 2.5vw, 2.5rem); max-width: 720px; }
     .construction-notice { top: 100px; left: 32px; right: 32px; font-size: clamp(1.125rem, 2vw, 1.5rem); max-width: 720px; }
 }
+
+/* Content + nav styles */
+.site-header { position: relative; z-index: 60; }
+.mobile-nav {
+    position: fixed;
+    top: 16px; right: 16px;
+    display: flex; gap: 8px;
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: saturate(1.2) blur(6px);
+    border-radius: 12px;
+    padding: 8px 10px;
+    z-index: 120;
+}
+.mobile-nav a, .mobile-nav button {
+    appearance: none;
+    border: none;
+    background: transparent;
+    font: inherit;
+    color: var(--text-color);
+    padding: 6px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+.mobile-nav a:focus, .mobile-nav a:hover, .mobile-nav button:focus, .mobile-nav button:hover {
+    background: rgba(255,255,255,0.8);
+}
+.mobile-nav button { cursor: pointer; border: 1px solid rgba(0,0,0,0.08); }
+
+#hero { position: relative; min-height: 60vh; }
+.content { position: relative; z-index: 80; }
+.section { padding: 48px 16px; max-width: 880px; margin: 0 auto; }
+.section h2 { margin: 0 0 12px; }
+.project-list { padding-left: 20px; }
+
+/* Anchor offset for fixed nav */
+#about, #projects, #contact { scroll-margin-top: 72px; }
+
+/* Motion toggle: disable duck animations and hide them */
+body.motion-off .flying-duck,
+body.motion-off .flying-duck1,
+body.motion-off .flying-duck2,
+body.motion-off .flying-duck3,
+body.motion-off .flying-duck4 { display: none !important; animation: none !important; }

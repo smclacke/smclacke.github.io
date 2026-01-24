@@ -1,0 +1,5 @@
+# open localhost server 
+python3 -m http.server 8080 --bind 0.0.0.0
+
+# get IP to use on mobile when connected to same WIFI
+ipconfig getifaddr en0
