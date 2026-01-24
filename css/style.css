@@ -1,3 +1,32 @@
+/* Mobile-first base and accessibility */
+:root {
+    --color-sky-start: #FFC1CC;
+    --color-sky-end: #FFB6C1;
+    --color-ocean-start: #42A5F5;
+    --color-ocean-end: #0D47A1;
+    --text-color: #222;
+    --shadow-soft: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+img, picture, svg, video {
+    max-width: 100%;
+    height: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .flying-duck,
+    .flying-duck1,
+    .flying-duck2,
+    .flying-duck3,
+    .flying-duck4 {
+        animation: none !important;
+    }
+}
+
 body {
 	margin: 0;
 	padding: 0;
@@ -10,7 +39,7 @@ body {
 	left: 0;
 	width: 100%;
 	height: 40%;
-	background: linear-gradient(to bottom, #FFC1CC, #FFB6C1);
+	background: linear-gradient(to bottom, var(--color-sky-start), var(--color-sky-end));
 }
 
 #ocean {
@@ -19,7 +48,7 @@ body {
 	left: 0;
 	width: 100%;
 	height: 60%;
-	background: linear-gradient(to bottom, #42A5F5, #0D47A1);
+	background: linear-gradient(to bottom, var(--color-ocean-start), var(--color-ocean-end));
 }
 
 .sun {
@@ -27,8 +56,8 @@ body {
 	top: 20%;
 	left: 60%;
 	transform: translate(-50%, -50%);
-	width: 60px;
-	height: 60px;
+	width: 56px;
+	height: 56px;
 	background: white;
 	border-radius: 50%;
 	box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.8);
@@ -77,104 +106,6 @@ body {
 	transform-origin: top center;
 }
 
-.boat {
-	position: absolute;
-	top: -20px;
-	right: 20%;
-	width: 100px;
-	height: 30px;
-}
-
-.hull {
-	width: 100%;
-	height: 100%;
-	background: #4CAF50;
-	border-top: 4px solid #F44336;
-}
-
-.deck {
-	position: absolute;
-	top: -10px;
-	left: 20px;
-	width: 60px;
-	height: 10px;
-	background: #8D5524;
-}
-
-.sail {
-	position: absolute;
-	top: -50px;
-	left: 40px;
-	width: 0;
-	height: 0;
-	border-left: 20px solid transparent;
-	border-right: 20px solid transparent;
-	border-bottom: 40px solid white;
-}
-
-.sail::after {
-	content: 'G';
-	position: absolute;
-	top: 10px;
-	left: -5px;
-	color: #4CAF50;
-	font-family: 'Courier New', monospace;
-	font-size: 20px;
-}
-
-.figure {
-	position: absolute;
-	top: -20px;
-	left: 30px;
-	width: 10px;
-	height: 20px;
-	background: #3E2723;
-}
-
-.figure::before {
-	content: '';
-	position: absolute;
-	top: -5px;
-	left: 0;
-	width: 10px;
-	height: 5px;
-	background: #4CAF50;
-}
-
-.life-preserver {
-	position: absolute;
-	top: 5px;
-	right: 5px;
-	width: 15px;
-	height: 15px;
-	border: 3px solid #FF9800;
-	border-radius: 50%;
-	background: white;
-}
-
-.swimmer {
-	position: absolute;
-	top: 50%;
-	left: 70%;
-	transform: translate(-50%, -50%);
-}
-
-.body {
-	width: 20px;
-	height: 30px;
-	background: #E0E0E0;
-}
-
-.head {
-	position: absolute;
-	top: -10px;
-	left: 5px;
-	width: 10px;
-	height: 10px;
-	background: #616161;
-	border-radius: 50%;
-}
-
 .bubbles {
 	position: absolute;
 	top: 0;
@@ -219,47 +150,29 @@ body {
 	left: 42%;
 }
 
-.flying-duck {
-	position: absolute;
-	top: -30%;
-	left: 90%;
-	transform: translateX(-50%);
-	width: 100px;
-	height: auto;
-	animation: fly 10s linear infinite;
-	z-index: 20;
-}
-
-.flying-duck1 {
-	position: absolute;
-	left: 80%; 
-	top: -38%;
-	width: 90px;
-	animation-delay: 0s;
-}
-
-.flying-duck2 {
-	position: absolute;
-	left: 95%; 
-	top: -38%;
-	animation-delay: 0s;
-	width: 90px;
-}
-
-.flying-duck3 {
-	position: absolute;
-	left: 75%; 
-	top: -30%;
-	animation-delay: 0s;
-	width: 90px;
-}
-
+/* Ducks: mobile-first sizes and smooth flight */
+.flying-duck,
+.flying-duck1,
+.flying-duck2,
+.flying-duck3,
 .flying-duck4 {
 	position: absolute;
-	left: 70%; 
-	top: -38%;
-	animation-delay: 0s;
-	width: 90px;
+	top: 6%;
+	left: 100%;
+	width: 72px;
+	height: auto;
+	z-index: 20;
+	animation: flyX 14s linear infinite;
+}
+
+.flying-duck1 { top: 10%; animation-delay: 2s; }
+.flying-duck2 { top: 14%; animation-delay: 4s; }
+.flying-duck3 { top: 8%;  animation-delay: 6s; }
+.flying-duck4 { top: 12%; animation-delay: 8s; }
+
+@keyframes flyX {
+	0% { left: 100%; }
+	100% { left: -10%; }
 }
 
 .duck {
@@ -275,67 +188,64 @@ body {
 
 .whale {
 	position: absolute;
-	bottom: 50%;
+	bottom: 44%;
 	left: 50%;
 	transform: translateX(-50%);
-	width: 100px;
+	width: 84px;
 	height: auto;
 	z-index: 5;
 }
 
 .name-title {
 	position: absolute;
-	top: 20px;
-	left: 20px;
-	font-family: 'Arial', sans-serif;
-	font-size: 24px;
+	top: 16px;
+	left: 16px;
+	right: 16px;
+	font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+	font-size: clamp(1.1rem, 5.5vw, 1.75rem);
 	font-weight: bold;
-	color: #333;
+	color: var(--text-color);
 	z-index: 100;
-	text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+	text-shadow: var(--shadow-soft);
+    line-height: 1.2;
+    max-width: min(600px, calc(100% - 32px));
 }
 
 .construction-notice {
 	position: absolute;
-	top: 80px;
-	left: 20px;
-	font-family: 'Arial', sans-serif;
-	font-size: 16px;
-	color: #333;
+	top: 64px;
+	left: 16px;
+	right: 16px;
+	font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+	font-size: clamp(0.95rem, 4.5vw, 1.25rem);
+	color: var(--text-color);
 	z-index: 100;
-	text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+	text-shadow: var(--shadow-soft);
+    max-width: min(600px, calc(100% - 32px));
 }
 
-/*
-.duck1 { 
-	left: 5%; 
-	top: 8%;
+/* Tablet enhancements */
+@media (min-width: 600px) {
+    .sun { width: 72px; height: 72px; left: 68%; top: 18%; }
+    .whale { width: 120px; bottom: 42%; }
+    .flying-duck,
+    .flying-duck1,
+    .flying-duck2,
+    .flying-duck3,
+    .flying-duck4 { width: 90px; }
+    .name-title { top: 20px; left: 24px; right: 24px; font-size: clamp(1.25rem, 3.5vw, 2rem); }
+    .construction-notice { top: 88px; left: 24px; right: 24px; font-size: clamp(1rem, 2.5vw, 1.375rem); }
 }
-.duck2 { 
-	left: 16%; 
-	top: 5%;
+
+/* Desktop enhancements */
+@media (min-width: 1024px) {
+    .sun { width: 100px; height: 100px; left: 70%; top: 16%; }
+    .whale { width: 180px; bottom: 40%; }
+    .flying-duck,
+    .flying-duck1,
+    .flying-duck2,
+    .flying-duck3,
+    .flying-duck4 { width: 120px; }
+    .name-title { top: 24px; left: 32px; right: 32px; font-size: clamp(1.5rem, 2.5vw, 2.5rem); max-width: 720px; }
+    .construction-notice { top: 100px; left: 32px; right: 32px; font-size: clamp(1.125rem, 2vw, 1.5rem); max-width: 720px; }
 }
-.duck3 { 
-	left: 28%; 
-	top: 12%;
-}
-.duck4 { 
-	left: 40%; 
-	top: 7%;
-}
-.duck5 { 
-	left: 52%; 
-	top: 15%;
-}
-.duck6 { 
-	left: 65%; 
-	top: 3%;
-}
-.duck7 { 
-	left: 78%; 
-	top: 10%;
-}
-.duck8 { 
-	left: 90%; 
-	top: 6%;
-}*/
