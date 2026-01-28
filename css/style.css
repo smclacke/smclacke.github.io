@@ -66,6 +66,18 @@ img {
   z-index: 100;
 }
 
+.github_logo, .linkedin_logo {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+  z-index: 5;
+  bottom: 70%;
+  right: 70%;
+}
+
 /* =========================================================
    NAVIGATION
 ========================================================= */
@@ -136,8 +148,6 @@ img {
   transform: scale(0.97);
 }
 
-
-
 /* =========================================================
    HEADER
 ========================================================= */
@@ -152,7 +162,6 @@ img {
   padding: 16px;
   z-index: 120; /* above the sky */
 }
-
 
 /* =========================================================
    HERO / SCENE
@@ -169,6 +178,31 @@ img {
   width: 100%;
   height: 100%;
 }
+
+/* BACKGROUND */
+#sky {
+  z-index: 1;
+}
+
+/* MIDGROUND */
+.projects {
+  z-index: 10;
+  position: relative;
+}
+
+/* FOREGROUND */
+#ocean {
+  z-index: 20;
+}
+
+.whale {
+  z-index: 25;
+}
+
+.flying-duck {
+  z-index: 15;
+}
+
 
 /* =========================================================
    SKY
@@ -247,31 +281,162 @@ img {
   z-index: 5;
 }
 
+/* =========================================================
+   SOCIALS
+========================================================= */
+.social-links {
+  position: absolute;
+  bottom: 40%;
+  right: 30px;
+  display: flex;
+  gap: 16px;
+  z-index: 30;
+}
+
+.social-links a img {
+  width: 32px;
+  height: 32px;
+  opacity: 1; /* fully visible */
+  transition: transform 0.2s ease;
+  animation: deepFloat 6s ease-in-out infinite;
+}
+
+/* Stagger the animations by targeting the <a> children */
+.social-links a:nth-child(1) img { animation-delay: 0s; }
+.social-links a:nth-child(2) img { animation-delay: 1s; }
+.social-links a:nth-child(3) img { animation-delay: 2s; }
+
+.social-links a:hover img {
+  transform: scale(1.1);
+}
+
+/* Slight drift in X & Y */
+@keyframes deepFloat {
+  0%   { transform: translateY(0) translateX(0); }
+  25%  { transform: translateY(3px) translateX(-2px); }
+  50%  { transform: translateY(0) translateX(1px); }
+  75%  { transform: translateY(-3px) translateX(-1px); }
+  100% { transform: translateY(0) translateX(0); }
+}
 
 /* =========================================================
    DUCKS
 ========================================================= */
+/* Base duck styles */
 .flying-duck,
 .flying-duck1,
 .flying-duck2,
 .flying-duck3,
 .flying-duck4 {
   position: absolute;
-  top: -40vh;
-  left: 100%;
-  width: 72px;
-  z-index: 20;
-  animation: flyX 14s linear infinite;
+  z-index: 15;
+  animation-name: fly;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
 }
 
-.flying-duck1 { top: -33vh; animation-delay: 2s; }
-.flying-duck2 { top: -37vh; animation-delay: 4s; }
-.flying-duck3 { top: -32vh;  animation-delay: 6s; }
-.flying-duck4 { top: -39vh; animation-delay: 8s; }
 
-@keyframes flyX {
-  from { left: 100%; }
-  to   { left: -10%; }
+/* Individual ducks */
+.flying-duck {
+  top: 24vh;
+  left: 100%;
+  width: 120px;
+  animation-duration: 16s;
+  animation-delay: 0s;
+}
+
+.flying-duck1 {
+  top: 28vh;
+  left: 120%;
+  width: 100px;
+  opacity: 0.9;
+  animation-duration: 18s;
+  animation-delay: 3s;
+}
+
+.flying-duck2 {
+  top: 32vh;
+  left: 140%;
+  width: 90px;
+  opacity: 0.85;
+  animation-duration: 22s;
+  animation-delay: 6s;
+}
+
+.flying-duck3 {
+  top: 22vh;
+  left: 160%;
+  width: 110px;
+  opacity: 0.95;
+  animation-duration: 20s;
+  animation-delay: 9s;
+}
+
+.flying-duck4 {
+  top: 36vh;
+  left: 180%;
+  width: 80px;
+  opacity: 0.8;
+  animation-duration: 26s;
+  animation-delay: 12s;
+}
+
+@keyframes fly {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  25% {
+    transform: translateX(-50vw) translateY(-6px);
+  }
+  50% {
+    transform: translateX(-100vw) translateY(0);
+  }
+  75% {
+    transform: translateX(-150vw) translateY(-6px);
+  }
+  100% {
+    transform: translateX(-220vw) translateY(0);
+  }
+}
+
+/* =========================================================
+   PROJECTS
+========================================================= */
+.projects {
+  position: absolute;
+  top: 56vh;              /* just above ocean */
+  left: 0;
+  width: 100%;
+  display: flex;
+  gap: 24px;
+  padding: 0 24px;
+  overflow-x: auto;
+}
+
+.project-card {
+  min-width: 220px;
+  background: rgba(255,255,255,0.75);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  animation: float 4s ease-in-out infinite;
+}
+
+/* stagger the float */
+.project-card:nth-child(2) { animation-delay: 1s; }
+.project-card:nth-child(3) { animation-delay: 2s; }
+
+@keyframes float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes sway {
+  0%   { transform: translateX(0); }
+  50%  { transform: translateX(3px); }
+  100% { transform: translateX(0); }
 }
 
 /* =========================================================
@@ -312,7 +477,8 @@ body.motion-off .flying-duck4 {
 
 @media (min-width: 1024px) {
   .sun { width: 100px; height: 100px; left: 60%; }
-  .whale { width: 180px; }
+  .whale { width: 180px; 
+  	bottom: 20%; }
   .flying-duck,
   .flying-duck1,
   .flying-duck2,
@@ -321,7 +487,17 @@ body.motion-off .flying-duck4 {
   .email {
     margin-top: 6px;
   }
+  .social-links {
+	bottom: 25%;
+	right: 75px;
+	gap: 28px;
+  }
+  .social-links img {
+	width: 60px;
+	height: 60px;
+  }
 }
+
 
 /* Tiny screens */
 @media (max-width: 480px) {
