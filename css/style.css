@@ -285,12 +285,9 @@ img {
    SOCIALS
 ========================================================= */
 .social-links {
-  position: absolute;
-  bottom: 40%;
-  right: 30px;
   display: flex;
-  gap: 16px;
-  z-index: 30;
+  gap: 12px;       /* space between icons */
+  margin-top: 18px; /* space below email */
 }
 
 .social-links a img {
@@ -298,25 +295,17 @@ img {
   height: 32px;
   opacity: 1; /* fully visible */
   transition: transform 0.2s ease;
-  animation: deepFloat 6s ease-in-out infinite;
+  animation: floatIcons 4s ease-in-out infinite;
 }
-
-/* Stagger the animations by targeting the <a> children */
-.social-links a:nth-child(1) img { animation-delay: 0s; }
-.social-links a:nth-child(2) img { animation-delay: 1s; }
-.social-links a:nth-child(3) img { animation-delay: 2s; }
 
 .social-links a:hover img {
   transform: scale(1.1);
 }
 
-/* Slight drift in X & Y */
-@keyframes deepFloat {
-  0%   { transform: translateY(0) translateX(0); }
-  25%  { transform: translateY(3px) translateX(-2px); }
-  50%  { transform: translateY(0) translateX(1px); }
-  75%  { transform: translateY(-3px) translateX(-1px); }
-  100% { transform: translateY(0) translateX(0); }
+/* optional gentle float for icons */
+@keyframes floatIcons {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
 }
 
 /* =========================================================
@@ -412,6 +401,7 @@ img {
   gap: 24px;
   padding: 0 24px;
   overflow-x: auto;
+  justify-content: center; 
 }
 
 .project-card {
