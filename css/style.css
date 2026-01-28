@@ -43,8 +43,8 @@ img {
    TEXT OVERLAYS
 ========================================================= */
 .name-title {
-  position: absolute;
-  top: 20px;
+  position: static;
+  top: 50%;
   left: 24px;
   right: 24px;
   font-size: clamp(1.1rem, 5.5vw, 1.75rem);
@@ -54,56 +54,93 @@ img {
   z-index: 100;
 }
 
-.construction-notice {
-  position: absolute;
-  top: 110px;
-  left: 50px;
-  right: 50px;
-  font-size: clamp(0.95rem, 4.5vw, 1.25rem);
-  color: var(--text-color);
-  text-shadow: var(--shadow-soft);
-  z-index: 100;
-}
-
 /* =========================================================
    NAVIGATION
 ========================================================= */
-.mobile-nav {
-  position: fixed;
-  top: 16px;
-  right: 16px;
-  display: flex;
-  gap: 8px;
-  padding: 8px 10px;
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(6px) saturate(1.2);
-  border-radius: 12px;
-  z-index: 120;
-}
-
-.mobile-nav a,
 .mobile-nav button {
   appearance: none;
-  border: none;
-  background: transparent;
-  font: inherit;
-  color: var(--text-color);
-  padding: 6px 10px;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.55);
+  padding: 6px;           /* less padding since it's just an icon */
   border-radius: 8px;
-  text-decoration: none;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.mobile-nav a:hover,
-.mobile-nav a:focus,
-.mobile-nav button:hover,
-.mobile-nav button:focus {
-  background: rgba(255, 255, 255, 0.8);
+.mobile-nav button:hover {
+  background: rgba(255,255,255,0.8);
 }
 
-.mobile-nav button {
-  border: 1px solid rgba(0, 0, 0, 0.08);
+.mobile-nav button:active {
+  background: rgba(255,255,255,0.7);
+  transform: scale(0.97);
 }
+
+/* DUCKKKKKK */
+/* Size the button duck properly */
+.duck-icon {
+  width: 48px;           /* fixed size */
+  height: 48px;          /* fixed size */
+  object-fit: contain;    /* scales GIF inside box */
+  display: block;
+}
+
+/* Optional wobble/flap on top of GIF */
+.flying-duck {
+  animation: flap 0.3s infinite ease-in-out;
+}
+
+@keyframes flap {
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(-5deg); }
+  50%  { transform: rotate(0deg); }
+  75%  { transform: rotate(5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Button styling */
+#motionToggle {
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.55);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#motionToggle:hover {
+  background: rgba(255,255,255,0.8);
+}
+
+#motionToggle:active {
+  background: rgba(255,255,255,0.7);
+  transform: scale(0.97);
+}
+
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+.site-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  z-index: 120; /* above the sky */
+}
+
 
 /* =========================================================
    HERO / SCENE
@@ -251,7 +288,7 @@ body.motion-off .flying-duck4 {
    RESPONSIVE ENHANCEMENTS
 ========================================================= */
 @media (min-width: 600px) {
-  .sun { width: 72px; height: 72px; left: 60%; }
+  .sun { width: 72px; height: 72px; left: 40%; }
   .whale { width: 120px; }
   .flying-duck,
   .flying-duck1,
@@ -268,4 +305,17 @@ body.motion-off .flying-duck4 {
   .flying-duck2,
   .flying-duck3,
   .flying-duck4 { width: 120px; }
+}
+
+/* Tiny screens */
+@media (max-width: 480px) {
+  .mobile-nav {
+    flex-direction: column;   /* vertical stack */
+    gap: 16px;                /* increased spacing vertically */
+    padding: 16px 12px;       /* taller padding for better feel */
+    right: 8px;
+    max-width: 90vw;          /* avoid overflow */
+  }
+  .sun { width: 52px; height: 52px; left: 55%; }
+  .whale { width: 130px; }
 }

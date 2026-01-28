@@ -1,23 +1,29 @@
 (function(){
-  const body = document.body;
+  const duck = document.getElementById('duck');
   const toggle = document.getElementById('motionToggle');
+  const body = document.body;
 
-  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const saved = localStorage.getItem('motion'); // 'on' | 'off' | null
-  const initialOff = saved ? saved === 'off' : prefersReduced;
+  const gifMotionOn  = "images/Mallard_Duck_(flying).gif"; // motion ON
+  const gifMotionOff = "images/Mallard_Duck.gif";  // motion OFF
 
-  function applyMotion(off){
-    body.classList.toggle('motion-off', !!off);
-    if (toggle) toggle.setAttribute('aria-pressed', off ? 'true' : 'false');
+  function setMotion(isOff) {
+    body.classList.toggle('motion-off', isOff);
+    duck.src = isOff ? gifMotionOff : gifMotionOn;
+    if (toggle) toggle.setAttribute('aria-pressed', isOff ? 'true' : 'false');
   }
 
-  applyMotion(initialOff);
+  // Initialize from localStorage or system preference
+  const saved = localStorage.getItem('motion'); // 'on' | 'off' | null
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const initialOff = saved ? saved === 'off' : prefersReduced;
+  setMotion(initialOff);
 
+  // Toggle button
   if (toggle) {
     toggle.addEventListener('click', () => {
-      const off = !body.classList.contains('motion-off');
-      applyMotion(off);
-      localStorage.setItem('motion', off ? 'off' : 'on');
+      const isOff = !body.classList.contains('motion-off');
+      setMotion(isOff);
+      localStorage.setItem('motion', isOff ? 'off' : 'on');
     });
   }
 })();
