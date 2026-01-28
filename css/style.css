@@ -1,352 +1,271 @@
-/* Mobile-first base and accessibility */
+/* =========================================================
+   VARIABLES
+========================================================= */
 :root {
-    --color-sky-start: #FFC1CC;
-    --color-sky-end: #FFB6C1;
-    --color-ocean-start: #42A5F5;
-    --color-ocean-end: #0D47A1;
-    --text-color: #222;
-    --shadow-soft: 1px 1px 2px rgba(255, 255, 255, 0.8);
+  --sky-pink: #eb879d;
+  --sky-purple: #a787eb;
+  --horizon-blue: #1e71ff;
+  --ocean-light: #1e71ff;
+  --ocean-dark: #0d47a1;
+
+  --text-color: #160894;
+  --shadow-soft: 1px 1px 2px rgba(255, 255, 255, 0.8);
 }
 
-* {
-    box-sizing: border-box;
-}
-
-img, picture, svg, video {
-    max-width: 100%;
-    height: auto;
+/* =========================================================
+   RESET & BASE
+========================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 html {
-	-webkit-text-size-adjust: 100%;
-	height: 100%;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .flying-duck,
-    .flying-duck1,
-    .flying-duck2,
-    .flying-duck3,
-    .flying-duck4 {
-        animation: none !important;
-    }
+  height: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-	margin: 0;
-	padding: 0;
-	overflow-x: hidden;
-	overflow-y: auto;
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* =========================================================
+   TEXT OVERLAYS
+========================================================= */
+.name-title {
+  position: absolute;
+  top: 20px;
+  left: 24px;
+  right: 24px;
+  font-size: clamp(1.1rem, 5.5vw, 1.75rem);
+  font-weight: bold;
+  color: var(--text-color);
+  text-shadow: var(--shadow-soft);
+  z-index: 100;
+}
+
+.construction-notice {
+  position: absolute;
+  top: 110px;
+  left: 50px;
+  right: 50px;
+  font-size: clamp(0.95rem, 4.5vw, 1.25rem);
+  color: var(--text-color);
+  text-shadow: var(--shadow-soft);
+  z-index: 100;
+}
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+.mobile-nav {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(6px) saturate(1.2);
+  border-radius: 12px;
+  z-index: 120;
+}
+
+.mobile-nav a,
+.mobile-nav button {
+  appearance: none;
+  border: none;
+  background: transparent;
+  font: inherit;
+  color: var(--text-color);
+  padding: 6px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.mobile-nav a:hover,
+.mobile-nav a:focus,
+.mobile-nav button:hover,
+.mobile-nav button:focus {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.mobile-nav button {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* =========================================================
+   HERO / SCENE
+========================================================= */
+#hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
 
 #scene {
-	position: relative;
-	width: 100%;
-	height: 100%;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
+/* =========================================================
+   SKY
+========================================================= */
 #sky {
   position: absolute;
-  width: 100%;
-  /*height: 40%;*/
-  height: 70vh;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 70vh;
   background: linear-gradient(
     to bottom,
-	var(--color-sky-start),
-	var(--color-sky-end),
-    #eb879d 0%,   /* sky blue */
-    #b987eb 70%,
-    #1e71ff 100% /* ocean blue */
+    var(--sky-pink) 0%,
+    #eb879d 35%,
+    var(--sky-purple) 65%,
+    var(--horizon-blue) 100%
   );
 }
 
-#ocean {
-	position: absolute;
-	top: 70%;
-	left: 0;
-	width: 100%;
-	height: 30vh;
-	background: linear-gradient(
-		to bottom, 
-		var(--color-ocean-start), 
-		var(--color-ocean-end),
-   		#1e71ff 0% /* ocean blue */
-		);
-}
-
 .sun {
-	position: absolute;
-	top: 20%;
-	left: 60%;
-	transform: translate(-50%, -50%);
-	width: 56px;
-	height: 56px;
-	background: white;
-	border-radius: 50%;
-	box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.8);
+  position: absolute;
+  top: 20%;
+  left: 38%;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 56px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.8);
 }
 
-.cloud {
-	position: absolute;
-	background: white;
-	border-radius: 50px;
-}
-
-.cloud:nth-child(1) {
-	width: 80px;
-	height: 40px;
-	top: 10%;
-	left: 10%;
-}
-
-.cloud:nth-child(2) {
-	width: 60px;
-	height: 30px;
-	top: 20%;
-	left: 25%;
-}
-
-.cloud:nth-child(3) {
-	width: 50px;
-	height: 25px;
-	top: 15%;
-	left: 35%;
-}
-
-.cloud:nth-child(4) {
-	width: 70px;
-	height: 35px;
-	top: 25%;
-	left: 80%;
-}
-
-.light-ray {
-	position: absolute;
-	top: 0;
-	width: 15px;
-	height: 100%;
-	background: rgba(173, 216, 230, 0.5);
-	transform-origin: top center;
-}
-
+/* Bubbles (sky shimmer) */
 .bubbles {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	pointer-events: none;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
 .bubble {
-	position: absolute;
-	background: white;
-	border-radius: 50%;
-	opacity: 0.8;
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
 }
 
-.bubble:nth-child(1) {
-	width: 10px;
-	height: 10px;
-	top: 28%;
-	left: 52%;
+.bubble:nth-child(1) { width: 10px; height: 10px; top: 28%; left: 52%; }
+.bubble:nth-child(2) { width: 8px;  height: 8px;  top: 33%; left: 47%; }
+.bubble:nth-child(3) { width: 12px; height: 12px; top: 38%; left: 42%; }
+
+/* =========================================================
+   OCEAN
+========================================================= */
+#ocean {
+  position: absolute;
+  top: 70vh;
+  left: 0;
+  width: 100%;
+  height: 30vh;
+  background: linear-gradient(
+    to bottom,
+    var(--ocean-light),
+    var(--ocean-dark)
+  );
+  overflow: visible;
 }
 
-.bubble:nth-child(2) {
-	width: 8px;
-	height: 8px;
-	top: 33%;
-	left: 47%;
-}
-
-.bubble:nth-child(3) {
-	width: 12px;
-	height: 12px;
-	top: 38%;
-	left: 42%;
-}
-
-.bubble:nth-child(4) {
-	width: 6px;
-	height: 6px;
-	top: 28%;
-	left: 42%;
-}
-
-/* Ducks: mobile-first sizes and smooth flight */
+/* =========================================================
+   DUCKS
+========================================================= */
 .flying-duck,
 .flying-duck1,
 .flying-duck2,
 .flying-duck3,
 .flying-duck4 {
-	position: absolute;
-	top: 6%;
-	left: 100%;
-	width: 72px;
-	height: auto;
-	z-index: 20;
-	animation: flyX 14s linear infinite;
+  position: absolute;
+  top: -40vh;
+  left: 100%;
+  width: 72px;
+  z-index: 20;
+  animation: flyX 14s linear infinite;
 }
 
-.flying-duck1 { top: 10%; animation-delay: 2s; }
-.flying-duck2 { top: 14%; animation-delay: 4s; }
-.flying-duck3 { top: 8%;  animation-delay: 6s; }
-.flying-duck4 { top: 12%; animation-delay: 8s; }
+.flying-duck1 { top: -33vh; animation-delay: 2s; }
+.flying-duck2 { top: -37vh; animation-delay: 4s; }
+.flying-duck3 { top: -32vh;  animation-delay: 6s; }
+.flying-duck4 { top: -39vh; animation-delay: 8s; }
 
 @keyframes flyX {
-	0% { left: 100%; }
-	100% { left: -10%; }
+  from { left: 100%; }
+  to   { left: -10%; }
 }
 
-.duck {
-	position: absolute;
-	width: 80px;
-	height: auto;
-	z-index: 10;
-}
-
-.object {
-	display: none;
-}
-
+/* =========================================================
+   WHALE
+========================================================= */
 .whale {
-	position: absolute;
-	bottom: 44%;
-	left: 50%;
-	transform: translateX(-50%);
-	width: 84px;
-	height: auto;
-	z-index: 5;
+  position: absolute;
+  bottom: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 84px;
+  z-index: 5;
 }
 
-.name-title {
-	position: absolute;
-	top: 16px;
-	left: 16px;
-	right: 16px;
-	padding-top: env(safe-area-inset-top);
-	padding-left: env(safe-area-inset-left);
-	padding-right: env(safe-area-inset-right);
-	font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-	font-size: clamp(1.1rem, 5.5vw, 1.75rem);
-	font-weight: bold;
-	color: var(--text-color);
-	z-index: 100;
-	text-shadow: var(--shadow-soft);
-    line-height: 1.2;
-    max-width: min(600px, calc(100% - 32px));
+/* =========================================================
+   MOTION TOGGLE SUPPORT
+========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .flying-duck,
+  .flying-duck1,
+  .flying-duck2,
+  .flying-duck3,
+  .flying-duck4 {
+    animation: none !important;
+    display: none !important;
+  }
 }
 
-.construction-notice {
-	position: absolute;
-	top: 64px;
-	left: 16px;
-	right: 16px;
-	padding-left: env(safe-area-inset-left);
-	padding-right: env(safe-area-inset-right);
-	font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-	font-size: clamp(0.95rem, 4.5vw, 1.25rem);
-	color: var(--text-color);
-	z-index: 100;
-	text-shadow: var(--shadow-soft);
-    max-width: min(600px, calc(100% - 32px));
-}
-
-/* Tablet enhancements */
-@media (min-width: 600px) {
-    .sun { width: 72px; height: 72px; left: 68%; top: 18%; }
-    .whale { width: 120px; bottom: 42%; }
-    .flying-duck,
-    .flying-duck1,
-    .flying-duck2,
-    .flying-duck3,
-    .flying-duck4 { width: 90px; }
-    .name-title { top: 20px; left: 24px; right: 24px; font-size: clamp(1.25rem, 3.5vw, 2rem); }
-    .construction-notice { top: 88px; left: 24px; right: 24px; font-size: clamp(1rem, 2.5vw, 1.375rem); }
-}
-
-/* Desktop enhancements */
-@media (min-width: 1024px) {
-    .sun { width: 100px; height: 100px; left: 70%; top: 16%; }
-    .whale { width: 180px; bottom: 40%; }
-    .flying-duck,
-    .flying-duck1,
-    .flying-duck2,
-    .flying-duck3,
-    .flying-duck4 { width: 120px; }
-    .name-title { top: 24px; left: 32px; right: 32px; font-size: clamp(1.5rem, 2.5vw, 2.5rem); max-width: 720px; }
-    .construction-notice { top: 100px; left: 32px; right: 32px; font-size: clamp(1.125rem, 2vw, 1.5rem); max-width: 720px; }
-}
-
-/* Content + nav styles */
-.site-header { position: relative; z-index: 60; }
-
-#hero {
-	position: relative;
-	flex-shrink: 0;
-	width: 100%;
-	height: 100vh;
-	overflow: hidden;
-}
-
-#scene {
-	position: relative;
-	width: 100%;
-	height: 100%;
-}
-
-.mobile-nav {
-    position: fixed;
-    top: 16px; right: 16px;
-    display: flex; gap: 8px;
-    background: rgba(255, 255, 255, 0.55);
-    backdrop-filter: saturate(1.2) blur(6px);
-    border-radius: 12px;
-    padding: 8px 10px;
-    z-index: 120;
-}
-.mobile-nav a, .mobile-nav button {
-    appearance: none;
-    border: none;
-    background: transparent;
-    font: inherit;
-    color: var(--text-color);
-    padding: 6px 10px;
-    border-radius: 8px;
-    text-decoration: none;
-}
-.mobile-nav a:focus, .mobile-nav a:hover, .mobile-nav button:focus, .mobile-nav button:hover {
-    background: rgba(255,255,255,0.8);
-}
-.mobile-nav button { cursor: pointer; border: 1px solid rgba(0,0,0,0.08); }
-
-.content { 
-	flex: 1;
-	background: white;
-	position: relative; 
-	z-index: 80; 
-}
-
-.section { 
-	padding: 48px 16px; 
-	max-width: 880px; 
-	margin: 0 auto; 
-}
-
-.section h2 { margin: 0 0 12px; }
-.project-list { padding-left: 20px; }
-
-/* Anchor offset for fixed nav */
-#about, #projects, #contact { scroll-margin-top: 72px; }
-
-/* Motion toggle: disable duck animations and hide them */
 body.motion-off .flying-duck,
 body.motion-off .flying-duck1,
 body.motion-off .flying-duck2,
 body.motion-off .flying-duck3,
-body.motion-off .flying-duck4 { display: none !important; animation: none !important; }
+body.motion-off .flying-duck4 {
+  animation: none !important;
+  display: none !important;
+}
+
+/* =========================================================
+   RESPONSIVE ENHANCEMENTS
+========================================================= */
+@media (min-width: 600px) {
+  .sun { width: 72px; height: 72px; left: 60%; }
+  .whale { width: 120px; }
+  .flying-duck,
+  .flying-duck1,
+  .flying-duck2,
+  .flying-duck3,
+  .flying-duck4 { width: 90px; }
+}
+
+@media (min-width: 1024px) {
+  .sun { width: 100px; height: 100px; left: 60%; }
+  .whale { width: 180px; }
+  .flying-duck,
+  .flying-duck1,
+  .flying-duck2,
+  .flying-duck3,
+  .flying-duck4 { width: 120px; }
+}
