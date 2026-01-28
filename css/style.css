@@ -54,6 +54,18 @@ img {
   z-index: 100;
 }
 
+.email {
+  position: static;
+  top: 50%;
+  left: 20px;
+  margin-top: 8px;
+  right: 90px;
+  font-size: 1.2rem;
+  color: var(--text-color);
+  text-shadow: var(--shadow-soft);
+  z-index: 100;
+}
+
 /* =========================================================
    NAVIGATION
 ========================================================= */
@@ -224,6 +236,19 @@ img {
 }
 
 /* =========================================================
+   WHALE
+========================================================= */
+.whale {
+  position: absolute;
+  bottom: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 84px;
+  z-index: 5;
+}
+
+
+/* =========================================================
    DUCKS
 ========================================================= */
 .flying-duck,
@@ -247,18 +272,6 @@ img {
 @keyframes flyX {
   from { left: 100%; }
   to   { left: -10%; }
-}
-
-/* =========================================================
-   WHALE
-========================================================= */
-.whale {
-  position: absolute;
-  bottom: 40%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 84px;
-  z-index: 5;
 }
 
 /* =========================================================
@@ -305,6 +318,9 @@ body.motion-off .flying-duck4 {
   .flying-duck2,
   .flying-duck3,
   .flying-duck4 { width: 120px; }
+  .email {
+    margin-top: 6px;
+  }
 }
 
 /* Tiny screens */
