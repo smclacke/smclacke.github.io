@@ -519,7 +519,7 @@ body.motion-off .flying-duck4 {
 ========================================================= */
 .project-page {
   min-height: 100vh;
-  background: #f6f7fb; /* soft neutral */
+  background: #264cb395;
 }
 
 .project-page #hero,
@@ -539,26 +539,6 @@ body.motion-off .flying-duck4 {
 
 .project-page .site-header {
   position: relative;
-}
-
-.project-page.minirt {
-  background: #264cb3; /* cool blue */
-}
-
-.project-page.fractol {
-  background: #d81230; /* warm */
-}
-
-.project-page.finearts {
-  background: #12bed8; /* warm */
-}
-
-.project-page.fthangouts {
-  background: #12d8ba; /* warm */
-}
-
-.project-page.kfheinxumc {
-  background: #d8125b; /* warm */
 }
 
 /* =========================================================
