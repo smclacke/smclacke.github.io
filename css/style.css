@@ -26,6 +26,11 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -170,7 +175,7 @@ img {
   position: relative;
   width: 100%;
   height: 100vh;
-  overflow: hidden;
+  overflow: visible;
 }
 
 #scene {
@@ -419,52 +424,41 @@ img {
 ========================================================= */
 .projects {
   position: absolute;
-  top: 56vh;              /* just above ocean */
-  left: 0;
-  width: 100%;
+  top: 35vh;
   display: flex;
-  gap: 24px;
+  gap: 30px;
   padding: 0 24px;
-  overflow-x: auto;
-  justify-content: center; 
+  z-index: 20;
 }
 
-.project-card {
-  min-width: 220px;
-  background: rgba(255,255,255,0.75);
-  border-radius: 16px;
-  padding: 16px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  animation: float 4s ease-in-out infinite;
-}
-
-/* stagger the float */
-.project-card:nth-child(2) { animation-delay: 1s; }
-.project-card:nth-child(3) { animation-delay: 2s; }
-
-@keyframes float {
-  0%   { transform: translateY(0); }
-  50%  { transform: translateY(-6px); }
-  100% { transform: translateY(0); }
-}
-
-@keyframes sway {
-  0%   { transform: translateX(0); }
-  50%  { transform: translateX(3px); }
-  100% { transform: translateX(0); }
-}
-
+/* Link wrapper */
 .project-link {
+  display: block;
   text-decoration: none;
-  color: inherit;
 }
 
-.project-link .project-card {
+/* Card */
+.project-card {
+  width: 100px;              /* bigger + more square */
+  aspect-ratio: 1 / 1;       /* TRUE square */
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transition: transform 0.25s ease;
   cursor: pointer;
 }
 
-.project-link .project-card:hover {
-  transform: translateY(-6px);
+/* Image */
+.project-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;       /* FULL image visible */
+  display: block;
+}
+
+/* Hover */
+.project-card:hover {
+  transform: translateY(-8px) scale(1.04);
 }
 
 /* =========================================================
@@ -552,6 +546,9 @@ body.motion-off .flying-duck4 {
   .flying-duck2,
   .flying-duck3,
   .flying-duck4 { width: 90px; }
+  .project-card {
+	justify-content: center;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -575,6 +572,15 @@ body.motion-off .flying-duck4 {
 	width: 60px;
 	height: 60px;
   }
+  .projects {
+    justify-content: center; /* center projects on large screens */
+    flex-wrap: wrap;         /* wrap multiple rows if needed */
+    overflow-x: visible;     /* no horizontal scroll on desktop */
+  }
+  .project-card {
+    width: 250px;           /* slightly larger on desktop */
+    height: 250px;          /* maintain square */
+  }
 }
 
 
@@ -589,4 +595,12 @@ body.motion-off .flying-duck4 {
   }
   .sun { width: 52px; height: 52px; left: 55%; }
   .whale { width: 130px; }
+  .projects {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 20px;
+  }
+  .project-card {
+    width: 100px;   /* smaller so 3 + 2 fit cleanly */
+  }
 }
