@@ -360,7 +360,7 @@ img {
 .flying-duck {
   top: 24vh;
   left: 100%;
-  width: 120px;
+  width: 84px;
   animation-duration: 16s;
   animation-delay: 0s;
 }
@@ -368,7 +368,7 @@ img {
 .flying-duck1 {
   top: 28vh;
   left: 120%;
-  width: 100px;
+  width: 70px;
   opacity: 0.9;
   animation-duration: 18s;
   animation-delay: 3s;
@@ -377,7 +377,7 @@ img {
 .flying-duck2 {
   top: 32vh;
   left: 140%;
-  width: 90px;
+  width: 63px;
   opacity: 0.85;
   animation-duration: 22s;
   animation-delay: 6s;
@@ -386,7 +386,7 @@ img {
 .flying-duck3 {
   top: 22vh;
   left: 160%;
-  width: 110px;
+  width: 77px;
   opacity: 0.95;
   animation-duration: 20s;
   animation-delay: 9s;
@@ -395,7 +395,7 @@ img {
 .flying-duck4 {
   top: 36vh;
   left: 180%;
-  width: 80px;
+  width: 56px;
   opacity: 0.8;
   animation-duration: 26s;
   animation-delay: 12s;
@@ -560,7 +560,7 @@ body.motion-off .flying-duck4 {
   .flying-duck1,
   .flying-duck2,
   .flying-duck3,
-  .flying-duck4 { width: 120px; }
+  .flying-duck4 { width: 100px; }
   .email {
     margin-top: 6px;
   }
