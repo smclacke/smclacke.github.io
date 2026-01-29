@@ -282,6 +282,31 @@ img {
 }
 
 /* =========================================================
+   PENGUIN
+========================================================= */
+.name-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.penguin {
+  position: absolute;
+  top: -20px;     /* move it a bit higher */
+  left: -15px;    /* keep it snug to the S */
+  width: 25px;    /* tiny bit bigger */
+  height: auto;
+  pointer-events: none;
+  z-index: 101;
+  animation: penguinWiggle 3s ease-in-out infinite;
+}
+
+@keyframes penguinWiggle {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(2px); }
+}
+
+
+/* =========================================================
    SOCIALS
 ========================================================= */
 .social-links {

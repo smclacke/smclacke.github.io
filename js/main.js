@@ -3,8 +3,8 @@
   const toggle = document.getElementById('motionToggle');
   const body = document.body;
 
-  const gifMotionOn  = "images/Mallard_Duck_(flying).gif"; // motion ON
-  const gifMotionOff = "images/Mallard_Duck.gif";  // motion OFF
+  const gifMotionOn  = "images/flying_duck.gif"; // motion ON
+  const gifMotionOff = "images/walking_duck.gif";  // motion OFF
 
   function setMotion(isOff) {
     body.classList.toggle('motion-off', isOff);
