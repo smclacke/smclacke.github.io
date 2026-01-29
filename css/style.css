@@ -348,7 +348,7 @@ img {
 .flying-duck3,
 .flying-duck4 {
   position: absolute;
-  z-index: 15;
+  z-index: 30;
   animation-name: fly;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
@@ -429,6 +429,7 @@ img {
   gap: 30px;
   padding: 0 24px;
   z-index: 20;
+  overflow: visible;
 }
 
 /* Link wrapper */
