@@ -9,7 +9,7 @@
   --ocean-dark: #0d47a1;
   
   --font-family: system-ui, sans-serif;
-  --text-color: #160894;
+  --text-color: #5e4fe5;
   --shadow-soft: 1px 1px 2px rgba(255, 255, 255, 0.8);
 }
 
@@ -283,17 +283,70 @@ img {
   );
 }
 
-.sun {
+#sky,
+#ocean {
+  transition: background 1s ease;
+}
+
+/* NIGHT MODE */
+body.night #sky {
+  background: linear-gradient(
+    to bottom,
+    #0b0f2a 0%,
+    #151a3c 40%,
+    #1c2a5a 70%,
+    #0d47a1 100%
+  );
+}
+
+body.night #ocean {
+  background: linear-gradient(
+    to bottom,
+    #0a2a66,
+    #041733
+  );
+}
+
+body.night .sun {
+  opacity: 0.4;
+  box-shadow: none;
+}
+
+.sun-wrapper {
   position: absolute;
-  top: 20%;
-  left: 38%;
-  transform: translateY(-50%);
+  top: 18%;
+  left: 50%;
+  width: 90px;
+  height: 90px;
+
+  margin-left: -45px;
+  margin-top: -45px;
+
+  cursor: pointer;
+  z-index: 999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sun-wrapper:hover .sun {
+  transform: scale(1.15);
+  box-shadow:
+    0 0 40px 15px rgba(255,255,255,0.9),
+    0 0 80px 30px rgba(255,200,100,0.7);
+}
+
+.sun {
   width: 56px;
   height: 56px;
   background: white;
   border-radius: 50%;
   box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.8);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease;
+  pointer-events: none;
 }
+
 
 /* Bubbles (sky shimmer) */
 .bubbles {
@@ -309,9 +362,9 @@ img {
   opacity: 0.8;
 }
 
-.bubble:nth-child(1) { width: 10px; height: 10px; top: 32%; left: 56%; }
-.bubble:nth-child(2) { width: 8px;  height: 8px;  top: 38%; left: 53%; }
-.bubble:nth-child(3) { width: 12px; height: 12px; top: 44%; left: 50%; }
+.bubble:nth-child(1) { width: 10px; height: 10px; top: 38%; left: 60%; }
+.bubble:nth-child(2) { width: 8px;  height: 8px;  top: 42%; left: 58%; }
+.bubble:nth-child(3) { width: 12px; height: 12px; top: 46%; left: 56%; }
 
 @media (max-width: 600px) {
 	.bubble:nth-child(1),
@@ -341,6 +394,34 @@ img {
 /* =========================================================
    WHALE
 ========================================================= */
+.whale-bubbles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.whale-bubble {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 50%;
+  animation: bubbleRise 2.5s ease-out forwards;
+}
+
+@keyframes bubbleRise {
+  0% {
+    transform: translate(-50%, 0) scale(0.6);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -60px) scale(1.2);
+    opacity: 0;
+  }
+}
+
 .whale-wrapper {
   position: absolute;
   bottom: 40%;
@@ -736,7 +817,16 @@ body.motion-off .flying-duck4 {
    RESPONSIVE ENHANCEMENTS
 ========================================================= */
 @media (min-width: 600px) {
-  .sun { width: 72px; height: 72px; left: 40%; }
+    .sun-wrapper {
+    top: 20%;
+    left: 40%;
+    width: 120px;
+    height: 120px;
+  }
+  .sun {
+    width: 72px;
+    height: 72px;
+  }
   .whale { width: 120px; }
   .flying-duck,
   .flying-duck1,
@@ -749,7 +839,16 @@ body.motion-off .flying-duck4 {
 }
 
 @media (min-width: 1024px) {
-  .sun { width: 100px; height: 100px; left: 60%; }
+	.sun-wrapper {
+	  top: 15%;
+	  left: 65%;
+	  width: 140px;
+	  height: 140px;
+	}
+	.sun {
+	  width: 100px;
+	  height: 100px;
+	}
   .whale { width: 180px; 
   	bottom: 20%; }
   .flying-duck,
@@ -779,6 +878,6 @@ body.motion-off .flying-duck4 {
     right: 8px;
     max-width: 90vw;
   }
-  .sun { width: 52px; height: 52px; left: 55%; }
+  .sun-wrapper { width: 52px; height:32px; left: 65%; }
   .whale { width: 130px; }
 }

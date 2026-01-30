@@ -29,8 +29,30 @@
       localStorage.setItem('motion', !isOff ? 'off' : 'on');
     });
   }
+  const whale = document.getElementById('whale');
+	const bubbleContainer = document.querySelector('.whale-bubbles');
 
-	const whale = document.getElementById('whale');
+	let bubbleInterval;
+
+	whale.addEventListener('mouseenter', () => {
+	bubbleInterval = setInterval(() => {
+		const bubble = document.createElement('div');
+		bubble.className = 'whale-bubble';
+
+		// random horizontal drift
+		bubble.style.left = `${40 + Math.random() * 20}%`;
+		bubble.style.width = bubble.style.height =
+		`${6 + Math.random() * 6}px`;
+
+		bubbleContainer.appendChild(bubble);
+
+		setTimeout(() => bubble.remove(), 2500);
+	}, 300);
+	});
+
+	whale.addEventListener('mouseleave', () => {
+	clearInterval(bubbleInterval);
+	});
 
 	whale.addEventListener('click', () => {
 	whale.style.animation = 'none';
@@ -39,4 +61,19 @@
 	});
 
 
+	// SUN: toggle day/night
+	const sunWrapper = document.querySelector('.sun-wrapper');
+	if (sunWrapper) {
+		sunWrapper.addEventListener('click', (e) => {
+		e.stopPropagation();
+		body.classList.toggle('night');
+
+		localStorage.setItem('dayNight', body.classList.contains('night') ? 'night' : 'day');
+		});
+	}
+
+	const savedMode = localStorage.getItem('dayNight');
+	if (savedMode === 'night') body.classList.add('night');
+
+	
 })();
