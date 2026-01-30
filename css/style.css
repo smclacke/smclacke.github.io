@@ -84,6 +84,56 @@ img {
 }
 
 /* =========================================================
+   INTRO TEXT
+========================================================= */
+.intro-text {
+  position: absolute;
+  top: 22%;
+  left: 50%;
+  width: 60%;
+  height: auto;
+  transform: translateX(-50%);
+  text-align: center;
+  color: white;
+  font-family: system-ui, sans-serif;
+  z-index: 50; 
+  padding: 16px;
+  background-color: rgba(18, 39, 145, 0.4);
+  border-radius: 12px;
+}
+
+.intro-text h2 {
+  margin: 0 0 8px 0;
+  font-size: clamp(1.2rem, 5vw, 1.8rem);
+}
+
+.intro-text p {
+  margin: 0;
+  font-size: clamp(0.9rem, 3vw, 1.2rem);
+}
+
+@media (min-width: 1024px) {
+  .intro-text {
+    top: 8%;
+    left: 35%; 
+    width: 24%;
+    height: 18%;
+    transform: translateX(-50%);
+    padding: 20px;
+    background-color: rgba(18, 39, 145, 0.3);
+  }
+
+  .intro-text h2 {
+    font-size: clamp(1.0rem, 2.5vw, 2rem);
+  }
+
+  .intro-text p {
+    font-size: clamp(1rem, 1.4vw, 1.2rem);
+  }
+}
+
+
+/* =========================================================
    NAVIGATION
 ========================================================= */
 .mobile-nav button {
@@ -254,9 +304,17 @@ img {
   opacity: 0.8;
 }
 
-.bubble:nth-child(1) { width: 10px; height: 10px; top: 28%; left: 52%; }
-.bubble:nth-child(2) { width: 8px;  height: 8px;  top: 33%; left: 47%; }
-.bubble:nth-child(3) { width: 12px; height: 12px; top: 38%; left: 42%; }
+.bubble:nth-child(1) { width: 10px; height: 10px; top: 32%; left: 56%; }
+.bubble:nth-child(2) { width: 8px;  height: 8px;  top: 38%; left: 53%; }
+.bubble:nth-child(3) { width: 12px; height: 12px; top: 44%; left: 50%; }
+
+@media (max-width: 600px) {
+	.bubble:nth-child(1),
+	.bubble:nth-child(2),
+	.bubble:nth-child(3) {
+		display: none;
+	}
+}
 
 /* =========================================================
    OCEAN
@@ -685,7 +743,6 @@ body.motion-off .flying-duck4 {
   }
 }
 
-/* Tiny screens */
 @media (max-width: 480px) {
   .mobile-nav {
     flex-direction: column;
