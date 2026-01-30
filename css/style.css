@@ -48,42 +48,60 @@ img {
 /* =========================================================
    TEXT OVERLAYS
 ========================================================= */
-.name-title {
-  position: static;
-  top: 50%;
-  left: 24px;
-  right: 24px;
-  font-family: var(--font-family);
-  font-size: clamp(1.1rem, 5.5vw, 1.75rem);
-  font-weight: bold;
-  color: var(--text-color);
-  text-shadow: var(--shadow-soft);
-  z-index: 100;
-}
-
-.email {
-  position: static;
-  top: 50%;
-  left: 20px;
-  margin-top: 8px;
-  right: 90px;
-  font-size: 1.2rem;
-    font-family: var(--font-family);
-  color: var(--text-color);
-  text-shadow: var(--shadow-soft);
-  z-index: 100;
-}
-
-.github_logo, .linkedin_logo {
+/* Name + Email + Socials Wrapper */
+.top-left-bubble {
   position: absolute;
-  width: 24px;
-  height: 24px;
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 8px;
-  z-index: 5;
-  bottom: 70%;
-  right: 70%;
+  top: 12px;
+  left: 12px;
+  padding: 16px;
+  background-color: rgba(18, 39, 145, 0.3);
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 100;
+  transition: background 0.5s ease;
+}
+
+/* Name + Email */
+.top-left-bubble .name-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transform: translate(3px, 3px); 
+}
+
+.top-left-bubble .name-title,
+.top-left-bubble .email {
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+body.night .top-left-bubble {
+  background-color: rgba(0,0,60,0.5);
+}
+
+body.night .top-left-bubble .name-title,
+body.night .top-left-bubble .email {
+  color: #f0f4ff;
+}
+
+.top-left-bubble .social-links {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.top-left-bubble .social-links img {
+  width: 32px;
+  height: 32px;
+  transition: transform 0.2s ease;
+  border-radius: 8px;
+}
+
+.top-left-bubble .social-links img:hover {
+  transform: scale(1.1);
 }
 
 /* =========================================================
@@ -347,7 +365,6 @@ body.night .sun {
   pointer-events: none;
 }
 
-
 /* Bubbles (sky shimmer) */
 .bubbles {
   position: absolute;
@@ -443,7 +460,6 @@ body.night .sun {
     drop-shadow(0 0 14px rgba(180,220,255,0.8));
 }
 
-
 @keyframes whaleSwing {
   0%   { transform: translateX(0); }
   33%  { transform: translateX(200px); } 
@@ -461,7 +477,7 @@ body.night .sun {
 
 .penguin {
   position: absolute;
-  top: -20px; 
+  top: 45px; 
   left: -15px; 
   width: 25px; 
   height: auto;
@@ -475,11 +491,10 @@ body.night .sun {
   50% { transform: translateX(2px); }
 }
 
-
 /* =========================================================
    SOCIALS
 ========================================================= */
-.social-links {
+/*.social-links {
   display: flex;
   gap: 12px;    
   margin-top: 18px;
@@ -500,7 +515,7 @@ body.night .sun {
 @keyframes floatIcons {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(-4px); }
-}
+}*/
 
 /* =========================================================
    DUCKS
@@ -858,15 +873,6 @@ body.motion-off .flying-duck4 {
   .flying-duck4 { width: 100px; }
   .email {
     margin-top: 6px;
-  }
-  .social-links {
-	bottom: 25%;
-	right: 75px;
-	gap: 28px;
-  }
-  .social-links img {
-	width: 60px;
-	height: 60px;
   }
 }
 
