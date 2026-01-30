@@ -13,11 +13,9 @@
   }
 
   // --- INITIAL STATE ---
-  // Default: motion OFF
   let initialOff = true;
 
-  // If user previously saved preference, use that
-  const saved = localStorage.getItem('motion'); // 'on' | 'off' | null
+  const saved = localStorage.getItem('motion');
   if (saved === 'on') initialOff = false;
   if (saved === 'off') initialOff = true;
 
@@ -26,9 +24,19 @@
   // --- TOGGLE BUTTON ---
   if (toggle) {
     toggle.addEventListener('click', () => {
-      const isOff = body.classList.contains('motion-off'); // current state
-      setMotion(!isOff); // flip
+      const isOff = body.classList.contains('motion-off');
+      setMotion(!isOff);
       localStorage.setItem('motion', !isOff ? 'off' : 'on');
     });
   }
+
+	const whale = document.getElementById('whale');
+
+	whale.addEventListener('click', () => {
+	whale.style.animation = 'none';
+	void whale.offsetWidth; // reset animation
+	whale.style.animation = 'whaleSwing 2s ease-in-out';
+	});
+
+
 })();
