@@ -1,10 +1,10 @@
-(function(){
+(function() {
   const duck = document.getElementById('duck');
   const toggle = document.getElementById('motionToggle');
   const body = document.body;
 
-  const gifMotionOn  = "images/flying_duck.gif"; // motion ON
-  const gifMotionOff = "images/walking_duck.gif";  // motion OFF
+  const gifMotionOn  = "images/flying_duck.gif";  // motion ON
+  const gifMotionOff = "images/walking_duck.gif"; // motion OFF
 
   function setMotion(isOff) {
     body.classList.toggle('motion-off', isOff);
@@ -12,18 +12,23 @@
     if (toggle) toggle.setAttribute('aria-pressed', isOff ? 'true' : 'false');
   }
 
-  // Initialize from localStorage or system preference
+  // --- INITIAL STATE ---
+  // Default: motion OFF
+  let initialOff = true;
+
+  // If user previously saved preference, use that
   const saved = localStorage.getItem('motion'); // 'on' | 'off' | null
-  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const initialOff = saved ? saved === 'off' : prefersReduced;
+  if (saved === 'on') initialOff = false;
+  if (saved === 'off') initialOff = true;
+
   setMotion(initialOff);
 
-  // Toggle button
+  // --- TOGGLE BUTTON ---
   if (toggle) {
     toggle.addEventListener('click', () => {
-      const isOff = !body.classList.contains('motion-off');
-      setMotion(isOff);
-      localStorage.setItem('motion', isOff ? 'off' : 'on');
+      const isOff = body.classList.contains('motion-off'); // current state
+      setMotion(!isOff); // flip
+      localStorage.setItem('motion', !isOff ? 'off' : 'on');
     });
   }
 })();
