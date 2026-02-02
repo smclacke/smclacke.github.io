@@ -391,7 +391,7 @@ body.night .sun {
 	}
 }
 
-@media (min-width: 600px) {
+@media (max-width: 1000px) {
 	.bubble:nth-child(1),
 	.bubble:nth-child(2),
 	.bubble:nth-child(3) {
@@ -633,7 +633,7 @@ body.night .sun {
     align-items: center;
     gap: 32px;
     padding: 0 64px;
-    overflow: hidden;
+    overflow: visible;
     width: 100%;
     left: 50%;
     transform: translateX(-50%);
@@ -645,7 +645,7 @@ body.night .sun {
   }
 }
 
-@media (min-width: 600px) {
+@media (max-width: 1000px) {
 	.projects {
     flex-wrap: nowrap;
 	overflow: visible;
