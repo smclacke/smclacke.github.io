@@ -391,6 +391,14 @@ body.night .sun {
 	}
 }
 
+@media (min-width: 600px) {
+	.bubble:nth-child(1),
+	.bubble:nth-child(2),
+	.bubble:nth-child(3) {
+		display: none;
+	}
+}
+
 /* =========================================================
    OCEAN
 ========================================================= */
@@ -490,32 +498,6 @@ body.night .sun {
   0%, 100% { transform: translateX(0); }
   50% { transform: translateX(2px); }
 }
-
-/* =========================================================
-   SOCIALS
-========================================================= */
-/*.social-links {
-  display: flex;
-  gap: 12px;    
-  margin-top: 18px;
-}
-
-.social-links a img {
-  width: 32px;
-  height: 32px;
-  opacity: 1; 
-  transition: transform 0.2s ease;
-  animation: floatIcons 4s ease-in-out infinite;
-}
-
-.social-links a:hover img {
-  transform: scale(1.1);
-}
-
-@keyframes floatIcons {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-4px); }
-}*/
 
 /* =========================================================
    DUCKS
@@ -651,17 +633,33 @@ body.night .sun {
     align-items: center;
     gap: 32px;
     padding: 0 64px;
-    overflow-x: visible;
+    overflow: hidden;
     width: 100%;
     left: 50%;
     transform: translateX(-50%);
   }
-
   .project-card {
     width: 200px;
 	height: 200px;
     flex: 0 0 auto;
   }
+}
+
+@media (min-width: 600px) {
+	.projects {
+    flex-wrap: nowrap;
+	overflow: visible;
+    justify-content: center;
+	row-gap: 20px;
+	align-items: center;
+	gap: 32px;
+    padding: 0 64px;
+  }
+	.project-card {
+		width: 140px; 
+		height: 140px;
+		flex: 0 0 auto;
+	}
 }
 
 @media (max-width: 600px) {
@@ -833,8 +831,8 @@ body.motion-off .flying-duck4 {
 ========================================================= */
 @media (min-width: 600px) {
     .sun-wrapper {
-    top: 20%;
-    left: 40%;
+    top: 10%;
+    left: 60%;
     width: 120px;
     height: 120px;
   }
