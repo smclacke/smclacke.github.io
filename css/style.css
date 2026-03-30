@@ -2,41 +2,33 @@
    VARIABLES
 ========================================================= */
 :root {
-  --sky-pink: #eb879d;
-  --sky-purple: #a787eb;
-  --horizon-blue: #1e71ff;
+  --sky-pink:    #eb879d;
+  --sky-purple:  #a787eb;
+  --horizon-blue:#1e71ff;
   --ocean-light: #1e71ff;
-  --ocean-dark: #0d47a1;
-  
-  --font-family: system-ui, sans-serif;
-  --text-color: #5e4fe5;
-  --shadow-soft: 1px 1px 2px rgba(255, 255, 255, 0.8);
+  --ocean-dark:  #0d47a1;
+  --font-family: system-ui, -apple-system, sans-serif;
+  --header-h:    76px;
 }
 
 /* =========================================================
    RESET & BASE
 ========================================================= */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+*, *::before, *::after { box-sizing: border-box; }
 
 html {
   height: 100%;
   -webkit-text-size-adjust: 100%;
-}
-
-html, body {
-  margin: 0;
-  padding: 0;
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
+  padding: 0;
   min-height: 100vh;
   overflow-x: hidden;
   font-family: var(--font-family);
+  background: transparent;
 }
 
 img {
@@ -46,62 +38,247 @@ img {
 }
 
 /* =========================================================
-   TEXT OVERLAYS
+   FIXED BACKGROUND GRADIENT
+   Always spans the full viewport — never cut off, never
+   stretched by page content. body::before stays fixed.
 ========================================================= */
-/* Name + Email + Socials Wrapper */
-.top-left-bubble {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  padding: 16px;
-  background-color: rgba(18, 39, 145, 0.3);
-  border-radius: 12px;
-  backdrop-filter: blur(6px);
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    to bottom,
+    #f0adc2  0%,
+    #c0acee 28%,
+    #7aaef8 52%,
+    #3568d4 68%,
+    #0d47a1 100%
+  );
+  transition: background 1s ease;
+}
+
+body.night::before {
+  background: linear-gradient(
+    to bottom,
+    #0b0f2a  0%,
+    #151a3c 30%,
+    #1c2a5a 55%,
+    #0d47a1 75%,
+    #041733 100%
+  );
+}
+
+/* Project pages get their own fixed background */
+body.project-page::before {
+  background: linear-gradient(150deg, #3b6ef0 0%, #1e71ff 55%, #0d47a1 100%);
+  transition: none;
+}
+
+/* =========================================================
+   HEADER  (fixed — sits above everything)
+========================================================= */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 12px 16px;
+  z-index: 120;
   gap: 12px;
-  z-index: 100;
-  transition: background 0.5s ease;
 }
 
-/* Name + Email */
-.top-left-bubble .name-wrapper {
+/* =========================================================
+   TOP-LEFT BUBBLE
+========================================================= */
+.top-left-bubble {
+  padding: 14px 16px;
+  background: rgba(18, 39, 145, 0.32);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  transform: translate(3px, 3px); 
-}
-
-.top-left-bubble .name-title,
-.top-left-bubble .email {
-  color: white;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  align-items: center;
+  gap: 10px;
+  transition: background 0.5s ease;
+  max-width: min(220px, 55vw);
 }
 
 body.night .top-left-bubble {
-  background-color: rgba(0,0,60,0.5);
+  background: rgba(0, 0, 60, 0.55);
 }
 
-body.night .top-left-bubble .name-title,
-body.night .top-left-bubble .email {
-  color: #f0f4ff;
-}
-
-.top-left-bubble .social-links {
+.name-wrapper {
+  position: relative;
   display: flex;
-  gap: 12px;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.name-title {
+  color: white;
+  font-size: clamp(0.85rem, 2.5vw, 1rem);
+  font-weight: 600;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.45);
+}
+
+.email {
+  color: rgba(255,255,255,0.88);
+  font-size: clamp(0.72rem, 2vw, 0.82rem);
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.45);
+}
+
+body.night .name-title,
+body.night .email { color: #f0f4ff; }
+
+.social-links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.social-links img {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  transition: transform 0.2s ease;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.social-links img:hover { transform: scale(1.15); }
+
+/* =========================================================
+   PENGUIN
+========================================================= */
+.penguin {
+  position: absolute;
+  top: 46px;
+  left: -16px;
+  width: 22px;
+  height: auto;
+  pointer-events: none;
+  z-index: 5;
+  animation: penguinWiggle 1s ease-in-out infinite;
+}
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+.mobile-nav { flex-shrink: 0; }
+
+.mobile-nav button,
+#motionToggle {
+  appearance: none;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.55);
+  padding: 6px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.2s ease;
+}
+
+.mobile-nav button:hover,
+#motionToggle:hover { background: rgba(255,255,255,0.82); }
+
+.mobile-nav button:active,
+#motionToggle:active { background: rgba(255,255,255,0.7); transform: scale(0.97); }
+
+.duck-icon {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  display: block;
+}
+
+/* =========================================================
+   SKY SECTION  (mobile/tablet: full viewport height)
+========================================================= */
+.sky-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding-top: var(--header-h);
+  overflow-x: clip; /* clip horizontal duck overflow without clipping box-shadow */
+}
+
+/* =========================================================
+   SUN  — improved glow, soft rays, gentle pulse
+========================================================= */
+.sun-wrapper {
+  position: absolute;
+  top: 18%;
+  right: 16%;
+  width: 120px;
+  height: 120px;
+  cursor: pointer;
+  z-index: 30;
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
 
-.top-left-bubble .social-links img {
-  width: 32px;
-  height: 32px;
-  transition: transform 0.2s ease;
-  border-radius: 8px;
+/* Rotating rays */
+.sun-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -24px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,   rgba(255, 239, 120, 0.05) 10deg,  transparent 20deg,
+    transparent 50deg,  rgba(255,240,120,0.07) 60deg,  transparent 70deg,
+    transparent 95deg,  rgba(255, 239, 120, 0.05) 105deg, transparent 115deg,
+    transparent 140deg, rgba(255,240,120,0.07) 150deg, transparent 160deg,
+    transparent 185deg, rgba(255, 239, 120, 0.05) 195deg, transparent 205deg,
+    transparent 230deg, rgba(255,240,120,0.07) 240deg, transparent 250deg,
+    transparent 275deg, rgba(255, 239, 120, 0.05) 285deg, transparent 295deg,
+    transparent 320deg, rgba(255,240,120,0.07) 330deg, transparent 340deg
+  );
+  animation: sunRaysRotate 28s linear infinite;
+  pointer-events: none;
 }
 
-.top-left-bubble .social-links img:hover {
-  transform: scale(1.1);
+.sun {
+  width: 66px;
+  height: 66px;
+  background: radial-gradient(circle at 38% 36%, #ffffff 0%, #fff8d0 45%, rgba(255,220,80,0) 100%);
+  border-radius: 50%;
+  box-shadow:
+    0 0 18px  7px  rgba(255,255,200,0.95),
+    0 0 50px  20px rgba(255,220,100,0.65),
+    0 0 100px 42px rgba(255,180,50,0.35),
+    0 0 190px 75px rgba(255,150,30,0.15);
+  animation: sunPulse 5s ease-in-out infinite alternate;
+  transition: box-shadow 0.4s ease, opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.sun-wrapper:hover .sun {
+  box-shadow:
+    0 0 28px  12px rgba(255,255,220,1),
+    0 0 70px  30px rgba(255,220,100,0.85),
+    0 0 140px 56px rgba(255,180,50,0.5),
+    0 0 240px 96px rgba(255,150,30,0.25);
+}
+
+body.night .sun {
+  box-shadow: none;
+  opacity: 0.25;
+}
+
+body.night .sun-wrapper::before {
+  display: none;
 }
 
 /* =========================================================
@@ -109,400 +286,36 @@ body.night .top-left-bubble .email {
 ========================================================= */
 .intro-text {
   position: absolute;
-  top: 22%;
+  top: 50%;
   left: 50%;
-  width: 60%;
-  height: auto;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   text-align: center;
   color: white;
-  font-family: var(--font-family);
-  z-index: 50; 
-  padding: 16px;
-  background-color: rgba(18, 39, 145, 0.4);
-  border-radius: 12px;
+  z-index: 50;
+  padding: 18px 28px;
+  background: rgba(18, 39, 145, 0.38);
+  border-radius: 14px;
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  width: max-content;
+  max-width: 88vw;
 }
 
 .intro-text h2 {
-  margin: 0 0 8px 0;
-  font-size: clamp(1.2rem, 5vw, 1.8rem);
+  margin: 0 0 6px 0;
+  font-size: clamp(1.1rem, 3vw, 1.8rem);
 }
 
 .intro-text p {
   margin: 0;
-  font-size: clamp(0.9rem, 3vw, 1.2rem);
-}
-
-@media (min-width: 1024px) {
-  .intro-text {
-    top: 8%;
-    left: 35%; 
-    width: 24%;
-    height: 18%;
-    transform: translateX(-50%);
-    padding: 20px;
-    background-color: rgba(18, 39, 145, 0.3);
-  }
-
-  .intro-text h2 {
-    font-size: clamp(1.0rem, 2.5vw, 2rem);
-	font-family: var(--font-family);
-  }
-
-  .intro-text p {
-    font-size: clamp(1rem, 1.4vw, 1.2rem);
-    font-family: var(--font-family);
-  }
+  font-size: clamp(0.85rem, 2vw, 1.15rem);
+  line-height: 1.5;
 }
 
 
 /* =========================================================
-   NAVIGATION
+   DUCKS — foreground birds
 ========================================================= */
-.mobile-nav button {
-  appearance: none;
-  border: 1px solid rgba(0,0,0,0.08);
-  background: rgba(255,255,255,0.55);
-  padding: 6px; 
-  border-radius: 8px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.mobile-nav button:hover {
-  background: rgba(255,255,255,0.8);
-}
-
-.mobile-nav button:active {
-  background: rgba(255,255,255,0.7);
-  transform: scale(0.97);
-}
-
-/* DUCKKKKKK */
-.duck-icon {
-  width: 48px; 
-  height: 48px; 
-  object-fit: contain; 
-  display: block;
-}
-
-.flying-duck {
-  animation: flap 0.3s infinite ease-in-out;
-}
-
-@keyframes flap {
-  0%   { transform: rotate(0deg); }
-  25%  { transform: rotate(-5deg); }
-  50%  { transform: rotate(0deg); }
-  75%  { transform: rotate(5deg); }
-  100% { transform: rotate(0deg); }
-}
-
-/* Button styling */
-#motionToggle {
-  padding: 6px;
-  border-radius: 8px;
-  border: 1px solid rgba(0,0,0,0.08);
-  background: rgba(255,255,255,0.55);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#motionToggle:hover {
-  background: rgba(255,255,255,0.8);
-}
-
-#motionToggle:active {
-  background: rgba(255,255,255,0.7);
-  transform: scale(0.97);
-}
-
-/* =========================================================
-   HEADER
-========================================================= */
-.site-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px;
-  z-index: 120;
-}
-
-/* =========================================================
-   HERO / SCENE
-========================================================= */
-#hero {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: visible;
-  margin-top: 0;
-  padding-top: 0;
-}
-
-
-#scene {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-/* BACKGROUND */
-#sky {
-  z-index: 1;
-}
-
-/* MIDGROUND */
-.projects {
-  z-index: 10;
-  position: relative;
-}
-
-/* FOREGROUND */
-#ocean {
-  z-index: 20;
-}
-
-.whale {
-  z-index: 25;
-}
-
-.flying-duck {
-  z-index: 15;
-}
-
-
-/* =========================================================
-   SKY
-========================================================= */
-#sky {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 70vh;
-  background: linear-gradient(
-    to bottom,
-    var(--sky-pink) 0%,
-    #eb879d 35%,
-    var(--sky-purple) 65%,
-    var(--horizon-blue) 100%
-  );
-}
-
-#sky,
-#ocean {
-  transition: background 1s ease;
-}
-
-/* NIGHT MODE */
-body.night #sky {
-  background: linear-gradient(
-    to bottom,
-    #0b0f2a 0%,
-    #151a3c 40%,
-    #1c2a5a 70%,
-    #0d47a1 100%
-  );
-}
-
-body.night #ocean {
-  background: linear-gradient(
-    to bottom,
-    #0a2a66,
-    #041733
-  );
-}
-
-body.night .sun {
-  opacity: 0.4;
-  box-shadow: none;
-}
-
-.sun-wrapper {
-  position: absolute;
-  top: 18%;
-  left: 50%;
-  width: 90px;
-  height: 90px;
-
-  margin-left: -45px;
-  margin-top: -45px;
-
-  cursor: pointer;
-  z-index: 999;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.sun-wrapper:hover .sun {
-  transform: scale(1.15);
-  box-shadow:
-    0 0 40px 15px rgba(255,255,255,0.9),
-    0 0 80px 30px rgba(255,200,100,0.7);
-}
-
-.sun {
-  width: 56px;
-  height: 56px;
-  background: white;
-  border-radius: 50%;
-  box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.8);
-  transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease;
-  pointer-events: none;
-}
-
-/* Bubbles (sky shimmer) */
-.bubbles {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.bubble {
-  position: absolute;
-  background: white;
-  border-radius: 50%;
-  opacity: 0.8;
-}
-
-.bubble:nth-child(1) { width: 10px; height: 10px; top: 38%; left: 60%; }
-.bubble:nth-child(2) { width: 8px;  height: 8px;  top: 42%; left: 58%; }
-.bubble:nth-child(3) { width: 12px; height: 12px; top: 46%; left: 56%; }
-
-@media (max-width: 600px) {
-	.bubble:nth-child(1),
-	.bubble:nth-child(2),
-	.bubble:nth-child(3) {
-		display: none;
-	}
-}
-
-@media (max-width: 1000px) {
-	.bubble:nth-child(1),
-	.bubble:nth-child(2),
-	.bubble:nth-child(3) {
-		display: none;
-	}
-}
-
-/* =========================================================
-   OCEAN
-========================================================= */
-#ocean {
-  position: absolute;
-  top: 70vh;
-  left: 0;
-  width: 100%;
-  height: 30vh;
-  background: linear-gradient(
-    to bottom,
-    var(--ocean-light),
-    var(--ocean-dark)
-  );
-  overflow: visible;
-}
-
-/* =========================================================
-   WHALE
-========================================================= */
-.whale-bubbles {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.whale-bubble {
-  position: absolute;
-  bottom: 20%;
-  left: 50%;
-  width: 8px;
-  height: 8px;
-  background: rgba(255,255,255,0.8);
-  border-radius: 50%;
-  animation: bubbleRise 2.5s ease-out forwards;
-}
-
-@keyframes bubbleRise {
-  0% {
-    transform: translate(-50%, 0) scale(0.6);
-    opacity: 0.8;
-  }
-  100% {
-    transform: translate(-50%, -60px) scale(1.2);
-    opacity: 0;
-  }
-}
-
-.whale-wrapper {
-  position: absolute;
-  bottom: 40%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 5;
-}
-
-.whale {
-	width: 84px;
-	cursor: pointer;
-	display: block;
-	transition: filter 0.25s ease;
-}
-
-.whale:hover {
-  filter:
-    drop-shadow(0 0 6px rgba(255,255,255,0.9))
-    drop-shadow(0 0 14px rgba(180,220,255,0.8));
-}
-
-@keyframes whaleSwing {
-  0%   { transform: translateX(0); }
-  33%  { transform: translateX(200px); } 
-  66%  { transform: translateX(-200px); }
-  100% { transform: translateX(0); } 
-}
-
-/* =========================================================
-   PENGUIN
-========================================================= */
-.name-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.penguin {
-  position: absolute;
-  top: 50px; 
-  left: -15px; 
-  width: 25px; 
-  height: auto;
-  pointer-events: none;
-  z-index: 101;
-  animation: penguinWiggle 3s ease-in-out infinite;
-}
-
-@keyframes penguinWiggle {
-  0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(2px); }
-}
-
-/* =========================================================
-   DUCKS
-========================================================= */
-/* Base duck styles */
 .flying-duck,
 .flying-duck1,
 .flying-duck2,
@@ -516,103 +329,85 @@ body.night .sun {
   will-change: transform;
 }
 
+.flying-duck  { top: 23%; left: 100%; width: 78px; animation-duration: 16s; animation-delay: 0s; }
+.flying-duck1 { top: 29%; left: 120%; width: 64px; opacity: 0.9;  animation-duration: 19s; animation-delay: 3s; }
+.flying-duck2 { top: 35%; left: 140%; width: 57px; opacity: 0.85; animation-duration: 23s; animation-delay: 7s; }
+.flying-duck3 { top: 19%; left: 160%; width: 72px; opacity: 0.95; animation-duration: 21s; animation-delay: 10s; }
+.flying-duck4 { top: 40%; left: 180%; width: 50px; opacity: 0.8;  animation-duration: 27s; animation-delay: 14s; }
 
-/* Individual ducks */
-.flying-duck {
-  top: 24vh;
-  left: 100%;
-  width: 84px;
-  animation-duration: 16s;
-  animation-delay: 0s;
+/* =========================================================
+   DUCKS — depth / silhouette birds (far away)
+========================================================= */
+.duck-far {
+  position: absolute;
+  z-index: 28;
+  animation-name: flyFar;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
 }
 
-.flying-duck1 {
-  top: 28vh;
-  left: 120%;
-  width: 70px;
-  opacity: 0.9;
-  animation-duration: 18s;
-  animation-delay: 3s;
+/* Medium distance — slightly dark */
+.duck-far-1 {
+  top: 16%;
+  left: 130%;
+  width: 36px;
+  opacity: 0.5;
+  filter: brightness(0.4) saturate(0.15);
+  animation-duration: 36s;
+  animation-delay: 5s;
 }
 
-.flying-duck2 {
-  top: 32vh;
-  left: 140%;
-  width: 63px;
-  opacity: 0.85;
-  animation-duration: 22s;
-  animation-delay: 6s;
+/* Far distance — near-silhouette */
+.duck-far-2 {
+  top: 12%;
+  left: 150%;
+  width: 22px;
+  opacity: 0.32;
+  filter: brightness(0.2) saturate(0);
+  animation-duration: 52s;
+  animation-delay: 18s;
 }
 
-.flying-duck3 {
-  top: 22vh;
-  left: 160%;
-  width: 77px;
-  opacity: 0.95;
-  animation-duration: 20s;
-  animation-delay: 9s;
-}
-
-.flying-duck4 {
-  top: 36vh;
-  left: 180%;
-  width: 56px;
-  opacity: 0.8;
-  animation-duration: 26s;
-  animation-delay: 12s;
-}
-
-@keyframes fly {
-  0% {
-    transform: translateX(0) translateY(0);
-  }
-  25% {
-    transform: translateX(-50vw) translateY(-6px);
-  }
-  50% {
-    transform: translateX(-100vw) translateY(0);
-  }
-  75% {
-    transform: translateX(-150vw) translateY(-6px);
-  }
-  100% {
-    transform: translateX(-220vw) translateY(0);
-  }
+/* Medium-far distance */
+.duck-far-3 {
+  top: 21%;
+  left: 210%;
+  width: 42px;
+  opacity: 0.55;
+  filter: brightness(0.45) saturate(0.18);
+  animation-duration: 29s;
+  animation-delay: 1s;
 }
 
 /* =========================================================
-   PROJECT CARDS
+   PROJECTS SECTION
 ========================================================= */
-.projects {
-  position: absolute;
-  z-index: 15;
-  width: 100%;
-  top: 40vh;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  padding: 0 24px;
-  justify-items: center;
-  overflow: visible;
+.projects-section {
+  position: relative;
+  padding: 48px 32px 60px;
 }
+
+.projects {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.project-link { display: block; text-decoration: none; }
 
 .project-card {
   width: 100%;
-  border-radius: 10px;
   aspect-ratio: 1 / 1;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  transition: transform 0.25s ease;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   cursor: pointer;
 }
 
-/* Link wrapper */
-.project-link {
-  display: block;
-  text-decoration: none;
-}
-
-/* Image */
 .project-card img {
   width: 100%;
   height: 100%;
@@ -620,198 +415,119 @@ body.night .sun {
   display: block;
 }
 
-/* Hover */
 .project-card:hover {
   transform: translateY(-8px) scale(1.04);
-}
-
-@media (min-width: 1024px) {
-  .projects {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    gap: 32px;
-    padding: 0 64px;
-    overflow: visible;
-    width: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  .project-card {
-    width: 200px;
-	height: 200px;
-    flex: 0 0 auto;
-  }
-}
-
-@media (max-width: 1000px) {
-	.projects {
-    flex-wrap: nowrap;
-	overflow: visible;
-    justify-content: center;
-	row-gap: 20px;
-	align-items: center;
-	gap: 32px;
-    padding: 0 64px;
-  }
-	.project-card {
-		width: 140px; 
-		height: 140px;
-		flex: 0 0 auto;
-	}
-}
-
-@media (max-width: 600px) {
-	.projects {
-    flex-wrap: wrap;
-    justify-content: center;
-    row-gap: 20px;
-  }
-	.project-card {
-		width: 100px; 
-	}
+  box-shadow: 0 18px 36px rgba(0,0,0,0.32);
 }
 
 /* =========================================================
-   PROJECT PAGES
+   OCEAN
 ========================================================= */
-body.project-page {
-  background-color: #2f5fe498;
-  margin: 0;
-  min-height: 100vh;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-}
-
-/* PROJECT PAGE FLEX CONTAINER */
-.project-page main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 32px;
-  box-sizing: border-box;
-}
-
-/* PROJECT CONTENT: info left, images right */
-.project-page .project-content {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  flex-wrap: wrap;    
-  max-width: 1200px;    
-  width: 100%;
-  justify-content: flex-start;
-  align-items: flex-start;
-  font-family: var(--font-family);
-}
-
-/* INFO PANEL */
-.project-page .project-info {
-  flex: 0 0 45%;         
-  max-width: 45%;
-  background-color: rgba(255, 255, 255, 0.15); 
-  backdrop-filter: blur(6px);
-  padding: 24px;
-  border-radius: 16px;
-  color: #160894;
-  box-sizing: border-box;
-  font-family: var(--font-family);
-}
-
-/* IMAGE PANEL */
-.project-page .project-images {
-  flex: 1 1 50%;    
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  justify-content: flex-start;
-  align-items: flex-start;
-}
-
-.project-page .project-images img {
-  width: 48%;       
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-}
-
-/* hide home page elements only on project page */
-.project-page #hero,
-.project-page #scene,
-.project-page #sky,
-.project-page #ocean,
-.project-page .projects,
-.project-page .flying-duck,
-.project-page .flying-duck1,
-.project-page .flying-duck2,
-.project-page .flying-duck3,
-.project-page .flying-duck4,
-.project-page .sun,
-.project-page .whale {
-  display: none;
-}
-
-/* header normal flow */
-.project-page .site-header {
+#ocean {
   position: relative;
   width: 100%;
-  z-index: 10;
-  font-family: var(--font-family);
-}
-
-/* RESPONSIVE ADJUSTMENTS */
-@media (max-width: 1024px) {
-  .project-page .project-info,
-  .project-page .project-images {
-    flex: 1 1 100%;
-    max-width: 100%;	
-  }
-}
-
-@media (max-width: 600px) {
-  .project-page main {
-    padding-top: 0px; 
-  }
-  .project-page .project-content {
-    flex-direction: column;
-    gap: 24px;
-  }
-  .project-page .project-images img {
-    width: 100%;
-  }
-}
-
-/* =========================================================
-   BUNNY BUTTON TO GO HOME
-========================================================= */
-.home-button {
+  padding: 56px 0 48px;
+  /* transparent at top so no hard cut — body gradient provides the colour */
+  background: linear-gradient(
+    to bottom,
+    transparent             0%,
+    rgba(8, 40, 140, 0.45) 25%,
+    rgba(4, 23, 51, 0.75)  100%
+  );
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px;
-  border-radius: 8px;
-  background: rgba(255,255,255,0.55);
-  border: 1px solid rgba(0,0,0,0.08);
 }
 
-.bunny-icon {
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
+
+/* =========================================================
+   WHALE
+========================================================= */
+.whale-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 5;
 }
 
-.home-button:hover {
+.whale {
+  width: 170px;
+  cursor: pointer;
+  display: block;
+  transition: filter 0.25s ease;
+}
+
+.whale:hover {
+  filter:
+    drop-shadow(0 0 8px rgba(255,255,255,0.9))
+    drop-shadow(0 0 20px rgba(180,220,255,0.8));
+}
+
+.whale-bubbles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.whale-bubble {
+  position: absolute;
+  bottom: 30%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
   background: rgba(255,255,255,0.8);
+  border-radius: 50%;
+  animation: bubbleRise 2.5s ease-out forwards;
 }
 
 /* =========================================================
-   MOTION TOGGLE SUPPORT
+   ANIMATIONS
+========================================================= */
+
+/* Main birds — organic up/down bob + slight left-banking rotation */
+@keyframes fly {
+  0%   { transform: translateX(0)       translateY(0)     rotate(-1.5deg); }
+  15%  { transform: translateX(-33vw)   translateY(-12px) rotate(-2.5deg); }
+  35%  { transform: translateX(-77vw)   translateY(-4px)  rotate(-1deg); }
+  55%  { transform: translateX(-121vw)  translateY(-14px) rotate(-2.5deg); }
+  78%  { transform: translateX(-171vw)  translateY(-6px)  rotate(-1deg); }
+  100% { transform: translateX(-220vw)  translateY(0)     rotate(-1.5deg); }
+}
+
+/* Far/depth birds — minimal vertical movement (distance effect) */
+@keyframes flyFar {
+  0%   { transform: translateX(0); }
+  40%  { transform: translateX(-88vw)  translateY(-3px); }
+  70%  { transform: translateX(-154vw) translateY(-1px); }
+  100% { transform: translateX(-220vw); }
+}
+
+
+
+@keyframes penguinWiggle {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(2px); }
+}
+
+@keyframes bubbleRise {
+  0%   { transform: translate(-50%, 0)     scale(0.6); opacity: 0.8; }
+  100% { transform: translate(-50%, -70px) scale(1.2); opacity: 0; }
+}
+
+@keyframes whaleSwing {
+  0%   { transform: translateX(0); }
+  33%  { transform: translateX(120px); }
+  66%  { transform: translateX(-120px); }
+  100% { transform: translateX(0); }
+}
+
+/* =========================================================
+   MOTION TOGGLE
 ========================================================= */
 @media (prefers-reduced-motion: reduce) {
-  .flying-duck,
-  .flying-duck1,
-  .flying-duck2,
-  .flying-duck3,
-  .flying-duck4 {
+  .flying-duck, .flying-duck1, .flying-duck2, .flying-duck3, .flying-duck4,
+  .duck-far, .duck-far-1, .duck-far-2, .duck-far-3 {
     animation: none !important;
     display: none !important;
   }
@@ -821,69 +537,253 @@ body.motion-off .flying-duck,
 body.motion-off .flying-duck1,
 body.motion-off .flying-duck2,
 body.motion-off .flying-duck3,
-body.motion-off .flying-duck4 {
+body.motion-off .flying-duck4,
+body.motion-off .duck-far,
+body.motion-off .duck-far-1,
+body.motion-off .duck-far-2,
+body.motion-off .duck-far-3 {
   animation: none !important;
   display: none !important;
 }
 
 /* =========================================================
-   RESPONSIVE ENHANCEMENTS
+   DESKTOP — ONE PAGE LAYOUT (≥ 900px)
+   body becomes a flex column that fills exactly 100vh.
+   All three sections fit without scrolling.
 ========================================================= */
-@media (min-width: 600px) {
-    .sun-wrapper {
-    top: 10%;
-    left: 60%;
+@media (min-width: 900px) {
+  body:not(.project-page) {
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding-top: var(--header-h);
+  }
+
+  /* Sky fills remaining space above projects */
+  .sky-section {
+    flex: 3 1 0;
+    min-height: 0;
+    padding-top: 0; /* body already has the top padding */
+    overflow: hidden;
+  }
+
+  /* Projects: auto height based on card size */
+  .projects-section {
+    flex: 0 0 auto;
+    padding: 14px 40px;
+  }
+
+  /* 6 in a row */
+  .projects {
+    grid-template-columns: repeat(6, 1fr);
+    max-width: 1160px;
+    gap: 14px;
+  }
+
+  /* Ocean fills remaining space below projects */
+  #ocean {
+    flex: 2 1 0;
+    min-height: 0;
+    padding: 0;
+    align-items: center;
+  }
+
+  .whale { width: 150px; }
+
+  .sun-wrapper {
+    top: 18%;
+    right: 18%;
     width: 120px;
     height: 120px;
   }
-  .sun {
-    width: 72px;
-    height: 72px;
-  }
-  .whale { width: 120px; }
-  .flying-duck,
-  .flying-duck1,
-  .flying-duck2,
-  .flying-duck3,
-  .flying-duck4 { width: 90px; }
-  .project-card {
-	justify-content: center;
-  }
+  .sun { width: 66px; height: 66px; }
 }
 
-@media (min-width: 1024px) {
-	.sun-wrapper {
-	  top: 15%;
-	  left: 65%;
-	  width: 140px;
-	  height: 140px;
-	}
-	.sun {
-	  width: 100px;
-	  height: 100px;
-	}
-  .whale { width: 180px; 
-  	bottom: 20%; }
-  .flying-duck,
-  .flying-duck1,
-  .flying-duck2,
-  .flying-duck3,
-  .flying-duck4 { width: 100px; }
-  .email {
-    margin-top: 6px;
-  }
+/* Large desktop: give cards a bit more room */
+@media (min-width: 1200px) {
+  .projects { max-width: 1200px; gap: 18px; }
 }
 
-@media (max-width: 480px) {
-  .mobile-nav {
-    flex-direction: column;
-    gap: 16px;         
-    padding: 16px 12px; 
-    right: 8px;
-    max-width: 90vw;
+/* =========================================================
+   TABLET — 3 × 2 GRID, PAGE SCROLLABLE (< 900px)
+========================================================= */
+@media (max-width: 899px) {
+  /* body returns to normal block flow */
+  body:not(.project-page) {
+    height: auto;
+    overflow: auto;
+    display: block;
+    padding-top: 0;
   }
-  .sun-wrapper { width: 52px; height:32px; left: 65%; }
+
+  .sky-section {
+    min-height: 100vh;
+    padding-top: var(--header-h);
+  }
+
+  .projects {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 680px;
+    gap: 16px;
+  }
+
+  .projects-section { padding: 44px 24px 56px; }
+
+  #ocean { padding: 56px 0 44px; }
+
+  .sun-wrapper { top: 20%; right: 8%; width: 92px; height: 92px; }
+  .sun { width: 56px; height: 56px; }
   .whale { width: 130px; }
 }
 
+/* =========================================================
+   MOBILE — 2-COLUMN GRID (< 540px)
+========================================================= */
+@media (max-width: 540px) {
+  :root { --header-h: 68px; }
 
+  .top-left-bubble {
+    padding: 10px 12px;
+    max-width: min(190px, 58vw);
+    gap: 8px;
+  }
+
+  .social-links img { width: 24px; height: 24px; }
+  .duck-icon { width: 38px; height: 38px; }
+
+  .sun-wrapper { top: 24%; right: 5%; width: 74px; height: 74px; }
+  .sun { width: 46px; height: 46px; }
+
+  .intro-text { padding: 14px 18px; }
+
+  .projects {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 420px;
+    gap: 12px;
+  }
+  .projects-section { padding: 32px 16px 44px; }
+
+  .whale { width: 100px; }
+  #ocean { padding: 44px 0 36px; }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+  .top-left-bubble { max-width: 54vw; }
+  .projects { gap: 10px; }
+}
+
+/* Landscape phones */
+@media (max-height: 480px) and (orientation: landscape) {
+  .sky-section { min-height: 100svh; }
+  .sun-wrapper { top: 15%; right: 8%; }
+  .intro-text { top: 58%; }
+}
+
+/* =========================================================
+   PROJECT PAGES
+========================================================= */
+body.project-page {
+  min-height: 100vh;
+  font-family: var(--font-family);
+  background: transparent;
+}
+
+/* Header: normal flow on project pages */
+.project-page .site-header {
+  position: relative;
+  top: auto;
+  left: auto;
+  width: 100%;
+  padding: 16px;
+  z-index: 10;
+}
+
+.project-page main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  padding: 8px 20px 40px;
+  box-sizing: border-box;
+}
+
+.project-page .project-content {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.project-page .project-info {
+  flex: 0 0 44%;
+  max-width: 44%;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 24px;
+  border-radius: 16px;
+  color: #160894;
+  box-sizing: border-box;
+}
+
+.project-page .project-images {
+  flex: 1 1 50%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.project-page .project-images img {
+  width: calc(50% - 7px);
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+}
+
+/* Stack panels on tablet */
+@media (max-width: 900px) {
+  .project-page .project-info,
+  .project-page .project-images {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
+/* Full-width images on mobile */
+@media (max-width: 540px) {
+  .project-page .project-images img { width: 100%; }
+  .project-page main { padding: 8px 14px 32px; }
+  .project-page .project-content { gap: 16px; }
+}
+
+/* =========================================================
+   HOME BUTTON (bunny)
+========================================================= */
+.home-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.55);
+  border: 1px solid rgba(0,0,0,0.08);
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+}
+
+.bunny-icon {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  display: block;
+}
+
+.home-button:hover { background: rgba(255,255,255,0.82); }

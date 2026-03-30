@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="icon" type="image/x-icon" href="/images/whale_icon.png">
 	<link rel="stylesheet" href="/css/style.css">
 	<title>Sarah McLacken</title>
@@ -10,22 +10,23 @@
 
 <body>
 	<header class="site-header">
-  		<div class="header-left">
-			<div class="top-left-bubble">
+		<div class="top-left-bubble">
 			<div class="name-wrapper">
-  				<img src="/images/walkingpete.gif" class="penguin" alt="Penguin easter egg">
-  				<div class="name-title">Sarah McLacken</div>
+				<img src="/images/walkingpete.gif" class="penguin" alt="Penguin">
+				<div class="name-title">Sarah McLacken</div>
 				<div class="email">sarah@mclacken.com</div>
 			</div>
 			<div class="social-links">
 				<a href="https://www.linkedin.com/in/sarah-mclacken/" target="_blank">
-					<img src="/images/linkedin_logo.png" alt="LinkedIn"></a>
-					<a href="https://github.com/smclacke" target="_blank">
-						<img src="/images/github_logo.png" alt="GitHub"></a>
-						<a href="https://www.instagram.com/sarahmclackenart/" target="_blank">
-							<img src="/images/insta_logo.png" alt="Instagram"></a>
-						</div>
-					</div>
+					<img src="/images/linkedin_logo.png" alt="LinkedIn">
+				</a>
+				<a href="https://github.com/smclacke" target="_blank">
+					<img src="/images/github_logo.png" alt="GitHub">
+				</a>
+				<a href="https://www.instagram.com/sarahmclackenart/" target="_blank">
+					<img src="/images/insta_logo.png" alt="Instagram">
+				</a>
+			</div>
 		</div>
 		<nav class="mobile-nav" aria-label="Primary">
 			<button id="motionToggle" type="button" aria-label="Toggle motion">
@@ -34,85 +35,50 @@
 		</nav>
 	</header>
 
-	<div class="intro-text">
-			<h2>👋 Hi! I'm Sarah</h2>
-			<p>I'm a software engineer and artist. <br>Welcome to my portfolio! 🦆</p>
-	</div>
-
-
-<section id="hero" aria-label="Hero scene">
-  <div id="scene">
-
 	<!-- SKY -->
-    <div id="sky">
-	
-			<div class="bubbles">
-				<div class="bubble"></div>
-				<div class="bubble"></div>
-				<div class="bubble"></div>
-			</div></div>
+	<section class="sky-section" aria-label="Hero">
 
 		<div class="sun-wrapper">
-		<div class="sun"></div>
+			<div class="sun"></div>
 		</div>
 
-		<!-- SKY DUCKS -->
-		<img src="/images/flying_duck.gif" class="flying-duck" />
-		<img src="/images/flying_duck.gif" class="flying-duck1" />
-		<img src="/images/flying_duck.gif" class="flying-duck2" />
-		<img src="/images/flying_duck.gif" class="flying-duck3" />
-		<img src="/images/flying_duck.gif" class="flying-duck4" />
+		<div class="intro-text">
+			<h2>👋 Hi! I'm Sarah</h2>
+			<p>I'm a software engineer and artist.<br>Welcome to my portfolio! 🦆</p>
 		</div>
 
-		<!-- PROJECTS -->
-  <section class="projects">
-	
-	<a href="/about" class="project-link">
-		<div class="project-card">
-		<img src="/about/images/pcard.png" alt="About">
-		</div>
-	</a>
+		<!-- Foreground birds -->
+		<img src="/images/flying_duck.gif" class="flying-duck"  alt="">
+		<img src="/images/flying_duck.gif" class="flying-duck1" alt="">
+		<img src="/images/flying_duck.gif" class="flying-duck2" alt="">
+		<img src="/images/flying_duck.gif" class="flying-duck3" alt="">
+		<img src="/images/flying_duck.gif" class="flying-duck4" alt="">
 
-	<a href="/finearts" class="project-link">
-		<div class="project-card">
-		<img src="/finearts/images/pcard.png" alt="Fine Arts">
-		</div>
-	</a>
+		<!-- Depth / silhouette birds (far away) -->
+		<img src="/images/flying_duck.gif" class="duck-far duck-far-1" alt="">
+		<img src="/images/flying_duck.gif" class="duck-far duck-far-2" alt="">
+		<img src="/images/flying_duck.gif" class="duck-far duck-far-3" alt="">
+	</section>
 
-	<a href="/minirt" class="project-link">
-		<div class="project-card">
-		<img src="/minirt/images/pcard.png" alt="MiniRT">
+	<!-- PROJECTS -->
+	<section class="projects-section" aria-label="Projects">
+		<div class="projects">
+			<a href="/about"       class="project-link"><div class="project-card"><img src="/about/images/pcard.png"       alt="About"></div></a>
+			<a href="/finearts"    class="project-link"><div class="project-card"><img src="/finearts/images/pcard.png"    alt="Fine Arts"></div></a>
+			<a href="/minirt"      class="project-link"><div class="project-card"><img src="/minirt/images/pcard.png"      alt="MiniRT"></div></a>
+			<a href="/ft_hangouts" class="project-link"><div class="project-card"><img src="/ft_hangouts/images/pcard.png" alt="ft_hangouts"></div></a>
+			<a href="/fractol"     class="project-link"><div class="project-card"><img src="/fractol/images/pcard.png"     alt="Fractol"></div></a>
+			<a href="/kfheinxumc"  class="project-link"><div class="project-card"><img src="/kfheinxumc/images/pcard.png"  alt="KFHeinxUMC"></div></a>
 		</div>
-	</a>
-	
-	<a href="/ft_hangouts" class="project-link">
-		<div class="project-card">
-		<img src="/ft_hangouts/images/pcard.png" alt="ft_hangouts">
-		</div>
-	</a>
-
-	<a href="/fractol" class="project-link">
-		<div class="project-card">
-		<img src="/fractol/images/pcard.png" alt="Fractol">
-		</div>
-	</a>
-
-	<a href="/kfheinxumc" class="project-link">
-		<div class="project-card">
-		<img src="/kfheinxumc/images/pcard.png" alt="KFHeinxUMC">
-		</div>
-	</a>
 	</section>
 
 	<!-- OCEAN -->
-    <div id="ocean">
-
+	<div id="ocean">
 		<div class="whale-wrapper">
-			<img src="images/whale_ocean.png" class="whale" id="whale">
+			<img src="images/whale_ocean.png" class="whale" id="whale" alt="Whale">
 			<div class="whale-bubbles"></div>
 		</div>
-    </div>
-  </section>
+	</div>
 
 	<script src="/js/main.js" defer></script>
 </body>
